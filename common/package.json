@@ -1,0 +1,22 @@
+{
+  "name": "@tigerxinsights/tigerxwrites",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.16.0",
+  "dependencies": {
+    "typescript": "^5.9.2",
+    "zod": "^4.1.11"
+  }
+}
