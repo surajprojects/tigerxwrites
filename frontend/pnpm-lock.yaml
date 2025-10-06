@@ -11,9 +11,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.13
         version: 4.1.13(vite@7.1.7(jiti@2.6.1)(lightningcss@1.30.1))
-      '@tigerxinsights/tigerwrites':
-        specifier: ^1.0.1
-        version: 1.0.1
+      '@tigerxinsights/tigerxwrites':
+        specifier: ^1.0.0
+        version: 1.0.0
       axios:
         specifier: ^1.12.2
         version: 1.12.2
@@ -594,8 +594,8 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7
 
-  '@tigerxinsights/tigerwrites@1.0.1':
-    resolution: {integrity: sha512-qO6YEEpMTfVoD//3YGUAM5V1f/4s9sXFnK555Wm56oA7X8f2/Eb8hgOIP/o3Xm1bfxkf9IglPXbqlis5Ql+TuA==}
+  '@tigerxinsights/tigerxwrites@1.0.0':
+    resolution: {integrity: sha512-J/zoaRJ/M1D0TsMMBz9sFkmfZ8GtdQ4ADHJl3ca192muH25wcwvBa6NWPolHts14Vw/f2/fEPS58DiAdtwWPgQ==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1882,7 +1882,7 @@ snapshots:
       tailwindcss: 4.1.13
       vite: 7.1.7(jiti@2.6.1)(lightningcss@1.30.1)
 
-  '@tigerxinsights/tigerwrites@1.0.1':
+  '@tigerxinsights/tigerxwrites@1.0.0':
     dependencies:
       typescript: 5.9.3
       zod: 4.1.11

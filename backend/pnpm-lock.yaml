@@ -14,9 +14,9 @@ importers:
       '@prisma/extension-accelerate':
         specifier: ^2.0.2
         version: 2.0.2(@prisma/client@6.16.2(prisma@6.16.2(typescript@5.9.2))(typescript@5.9.2))
-      '@tigerxinsights/tigerwrites':
-        specifier: ^1.0.1
-        version: 1.0.1
+      '@tigerxinsights/tigerxwrites':
+        specifier: ^1.0.0
+        version: 1.0.0
       bcryptjs:
         specifier: ^3.0.2
         version: 3.0.2
@@ -736,8 +736,8 @@ packages:
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
-  '@tigerxinsights/tigerwrites@1.0.1':
-    resolution: {integrity: sha512-qO6YEEpMTfVoD//3YGUAM5V1f/4s9sXFnK555Wm56oA7X8f2/Eb8hgOIP/o3Xm1bfxkf9IglPXbqlis5Ql+TuA==}
+  '@tigerxinsights/tigerxwrites@1.0.0':
+    resolution: {integrity: sha512-J/zoaRJ/M1D0TsMMBz9sFkmfZ8GtdQ4ADHJl3ca192muH25wcwvBa6NWPolHts14Vw/f2/fEPS58DiAdtwWPgQ==}
 
   '@types/bcrypt@6.0.0':
     resolution: {integrity: sha512-/oJGukuH3D2+D+3H4JWLaAsJ/ji86dhRidzZ/Od7H/i8g+aCmvkeCc6Ni/f9uxGLSQVCRZkX2/lqEFG2BvWtlQ==}
@@ -1768,7 +1768,7 @@ snapshots:
 
   '@standard-schema/spec@1.0.0': {}
 
-  '@tigerxinsights/tigerwrites@1.0.1':
+  '@tigerxinsights/tigerxwrites@1.0.0':
     dependencies:
       typescript: 5.9.2
       zod: 4.1.11

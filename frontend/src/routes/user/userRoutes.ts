@@ -1,5 +1,5 @@
-import SignIn from "../../components/user/SignIn";
-import SignUp from "../../components/user/SignUp";
+import SignIn from "../../pages/user/SignIn";
+import SignUp from "../../pages/user/SignUp";
 import type { RouteObject } from "react-router-dom";
 
 export const userRoutes: RouteObject[] = [
