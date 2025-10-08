@@ -1,8 +1,8 @@
-import Btn from "../common/btn";
-import FormTitle from "../common/form/formTitle";
-import FormField from "../common/form/formField";
+import Btn from "../btn";
+import FormTitle from "../form/formTitle";
+import FormField from "../form/formField";
 import { useState, type ChangeEvent } from "react";
-import FormDescription from "../common/form/formDescription";
+import FormDescription from "../form/formDescription";
 import type { SignUpInput } from "@tigerxinsights/tigerxwrites";
 
 export default function SignUpForm({
