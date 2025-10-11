@@ -4,7 +4,8 @@ import jwtLib from "jsonwebtoken";
 import { Bindings, Variables } from "../utils/init";
 import { initPrisma } from "../utils/db";
 import { setCookie, deleteCookie } from "hono/cookie";
-import { SignInInput, signInInput, SignUpInput, signUpInput } from "@tigerxinsights/tigerwrites";
+import { SignInInput, signInInput, SignUpInput, signUpInput } from "@tigerxinsights/tigerxwrites";
+import { handleError } from "../utils/error";
 
 // User router (handles authentication & session management)
 export const userRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
@@ -21,8 +22,7 @@ userRouter.get("/signout", async (c) => {
         });
         return c.json({ message: "Signout successful!!!" });
     } catch (error) {
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });
 
@@ -70,8 +70,7 @@ userRouter.post("/signup", async (c) => {
         return c.json({ message: "Successfully created the user!!!" });
     }
     catch (error) {
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });
 
@@ -131,7 +130,6 @@ userRouter.post("/signin", async (c) => {
         return c.json({ message: "Sign In successful!!!" });
     }
     catch (error) {
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });

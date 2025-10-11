@@ -8,7 +8,7 @@ import type { SignUpInput } from "@tigerxinsights/tigerxwrites";
 export default function SignUpForm({
     handleSubmit
 }: {
-    handleSubmit: (data: SignUpInput) => Promise<boolean>
+    handleSubmit: (data: SignUpInput) => void
 }) {
     const initialData = {
         name: "",
@@ -32,19 +32,13 @@ export default function SignUpForm({
 
     return (
         <>
-            <section className="w-screen h-screen flex flex-col justify-center items-center">
+            <section className="w-full h-full flex flex-col justify-center items-center">
                 <FormTitle text="Create an account" />
                 <FormDescription text="Already have an account?" linkTo="/signin" linkName="Sign In" />
                 {/* Sign Up Form */}
                 <form onSubmit={async (evt) => {
                     evt.preventDefault();
-                    const result = await handleSubmit(formData);
-                    if (result) {
-
-                    }
-                    else {
-
-                    }
+                    handleSubmit(formData);
                 }}
                     className="w-72 sm:w-96 my-3"
                 >

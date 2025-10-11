@@ -1,12 +1,10 @@
 import Dot from "../ui/dot";
+import type { BlogData } from "../../utils/types/blog";
 
 export default function BlogAuthor({
     authorName = "Name",
-    bio = "Bio...",
-}: {
-    authorName?: string,
-    bio?: string,
-}) {
+    authorBio = "Bio...",
+}: Partial<BlogData>) {
     return (
         <>
             <section className="min-w-80 m-5">
@@ -17,7 +15,7 @@ export default function BlogAuthor({
                     </div>
                     <div className="mx-5">
                         <h6 className="text-2xl font-bold">{authorName}</h6>
-                        <p className="text-gray-500 mt-1">{bio}</p>
+                        <p className="text-gray-500 mt-1">{authorBio === "" ? "Bio..." : authorBio}</p>
                     </div>
                 </div>
             </section>

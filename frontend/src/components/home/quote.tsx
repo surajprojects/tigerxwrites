@@ -9,7 +9,7 @@ export default function Quote({
 }) {
     return (
         <>
-            <section className="w-screen h-screen hidden lg:flex justify-center items-center bg-gray-100 invisible lg:visible">
+            <section className="w-full h-full hidden lg:flex justify-center items-center bg-gray-100 invisible lg:visible">
                 <div className="w-8/12">
                     <h3 className="font-bold text-2xl">"{text}"</h3>
                     <p className="font-bold mt-3">{author}</p>

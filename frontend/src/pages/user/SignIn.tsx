@@ -1,21 +1,25 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../../utils/axios";
-import SignInForm from "../../components/user/SignInForm";
-import type { SignInInput } from "@tigerxinsights/tigerxwrites";
+import { useNavigate } from "react-router-dom";
 import Quote from "../../components/home/quote";
+import SignInForm from "../../components/user/SignInForm";
+import { errorHandle } from "../../utils/errors/errorHandle";
+import type { SignInInput } from "@tigerxinsights/tigerxwrites";
 
 export default function SignIn() {
+    const navigate = useNavigate();
     const handleSubmit = async (formData: SignInInput) => {
         try {
-            const result = await axiosInstance.post("/user/signin", formData);
-            console.log(result)
-            return true;
+            await axiosInstance.post("/user/signin", formData);
+            navigate("/blogs");
+            toast.success("Sign In successfull!!!");
         } catch (error) {
-            return false;
+            errorHandle(error);
         }
     };
     return (
         <>
-            <section className="flex">
+            <section className="w-screen flex items-center">
                 <SignInForm handleSubmit={handleSubmit} />
                 <Quote />
             </section>

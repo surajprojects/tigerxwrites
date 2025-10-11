@@ -2,7 +2,8 @@ import { Hono } from "hono";
 import { initPrisma } from "../utils/db";
 import { Bindings, Variables } from "../utils/init";
 import { blogAuth } from "../middlewares/blogAuth";
-import { createBlogInput, CreateBlogInput, updateBlogInput, UpdateBlogInput } from "@tigerxinsights/tigerwrites";
+import { createBlogInput, CreateBlogInput, updateBlogInput, UpdateBlogInput } from "@tigerxinsights/tigerxwrites";
+import { handleError } from "../utils/error";
 
 // Blog router (handles CRUD for blogs)
 export const blogRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
@@ -11,7 +12,15 @@ export const blogRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>
 blogRouter.get("/bulk", async (c) => {
     try {
         const prisma = initPrisma(c);
-        const bulkBlogs = await prisma.blog.findMany({});
+        const bulkBlogs = await prisma.blog.findMany({
+            include: {
+                author: {
+                    select: {
+                        name: true,
+                    }
+                }
+            }
+        });
         if (bulkBlogs.length < 1) {
             c.status(404);
             return c.json({ message: "Blogs not found!!!" });
@@ -19,8 +28,7 @@ blogRouter.get("/bulk", async (c) => {
         return c.json({ message: "Successfully found all blogs!!!", bulkBlogs });
     }
     catch (error) {
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });
 
@@ -30,7 +38,15 @@ blogRouter.get("/:id", async (c) => {
         const id = c.req.param("id");
         const prisma = initPrisma(c);
         const blogData = await prisma.blog.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                author: {
+                    select: {
+                        name: true,
+                        bio: true,
+                    }
+                }
+            }
         });
         if (!blogData) {
             c.status(404);
@@ -39,8 +55,7 @@ blogRouter.get("/:id", async (c) => {
         return c.json({ message: "Successfully found the blog!!!", blogData });
     }
     catch (error) {
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });
 
@@ -63,13 +78,12 @@ blogRouter.post("/", async (c) => {
                 title: body.title,
                 content: body.content,
                 authorId: userId,
-            }
+            },
         });
         return c.json({ message: "Successfully created the blog!!!", blogData });
     }
     catch (error) {
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });
 
@@ -98,17 +112,7 @@ blogRouter.patch("/:id", async (c) => {
         return c.json({ message: "Successfully updated the blog!!!", blogData });
     }
     catch (error) {
-        if (typeof error === "object" &&
-            error !== null &&
-            "code" in error &&
-            typeof (error as any).code === "string" &&
-            error.code === "P2025"
-        ) {
-            c.status(404);
-            return c.json({ message: "Blog not found!!!" });
-        }
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });
 
@@ -127,16 +131,6 @@ blogRouter.delete("/:id", async (c) => {
         return c.json({ message: "Successfully deleted the blog!!!" });
     }
     catch (error) {
-        if (typeof error === "object" &&
-            error !== null &&
-            "code" in error &&
-            typeof (error as any).code === "string" &&
-            error.code === "P2025"
-        ) {
-            c.status(404);
-            return c.json({ message: "Blog not found!!!" });
-        }
-        c.status(500);
-        return c.json({ message: "Internal Server Error!!!" });
+        return c.json(handleError(error, c));
     }
 });

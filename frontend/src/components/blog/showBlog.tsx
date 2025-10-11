@@ -1,14 +1,11 @@
 import { formatDate } from "../../utils/dateAndTime";
+import type { BlogData } from "../../utils/types/blog";
 
 export default function ShowBlog({
     title = "Blog Title",
     postedOn = "2025-01-01",
     content = "Blog Content..."
-}: {
-    title?: string,
-    postedOn?: string,
-    content?: string,
-}) {
+}: Partial<BlogData>) {
     return (
         <>
             <section className="m-5">

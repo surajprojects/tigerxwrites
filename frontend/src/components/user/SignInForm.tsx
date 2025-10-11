@@ -8,7 +8,7 @@ import type { SignInInput } from "@tigerxinsights/tigerxwrites";
 export default function SignInForm({
     handleSubmit
 }: {
-    handleSubmit: (data: SignInInput) => Promise<boolean>
+    handleSubmit: (data: SignInInput) => void
 }) {
     const initialData = {
         email: "",
@@ -31,19 +31,13 @@ export default function SignInForm({
 
     return (
         <>
-            <section className="w-screen h-screen flex flex-col justify-center items-center">
+            <section className="w-full h-full flex flex-col justify-center items-center">
                 <FormTitle text="Sign In" />
                 <FormDescription text="Create an account" linkTo="/signup" linkName="Sign Up" />
                 {/* Sign In Form */}
                 <form onSubmit={async (evt) => {
                     evt.preventDefault();
-                    const result = await handleSubmit(formData);
-                    if (result) {
-                        setFormData(initialData);
-                    }
-                    else {
-                        console.log("Network Error!!!");
-                    }
+                    handleSubmit(formData);
                 }}
                     className="w-72 sm:w-96 my-3"
                 >

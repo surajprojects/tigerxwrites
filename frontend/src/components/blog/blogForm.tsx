@@ -1,23 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { useState, type ChangeEvent } from "react";
-import type { BlogInput } from "../../utils/types/blogInput";
+import type { CreateBlogInput, UpdateBlogInput } from "@tigerxinsights/tigerxwrites";
 
 export default function BlogForm({
     handleSubmit,
+    handleEditSubmit,
+    isEdit = false,
     initialData = {
         title: "",
         content: "",
     },
 }: {
-    handleSubmit: (formData: BlogInput) => Promise<boolean>,
-    initialData?: BlogInput,
+    handleSubmit?: (formData: CreateBlogInput) => void,
+    handleEditSubmit?: (formData: UpdateBlogInput) => void,
+    isEdit?: boolean,
+    initialData?: CreateBlogInput,
 }) {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState<BlogInput>(initialData);
+    const [formData, setFormData] = useState<CreateBlogInput>(initialData);
     const handleChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
         const fieldName = evt.target.name;
         const fieldValue = evt.target.value;
-
         setFormData((prevData) => {
             return {
                 ...prevData,
@@ -30,12 +33,11 @@ export default function BlogForm({
             <form
                 onSubmit={async (evt) => {
                     evt.preventDefault();
-                    const result = await handleSubmit(formData);
-                    if (result) {
-                        navigate("/blogs");
+                    if (isEdit && handleEditSubmit) {
+                        handleEditSubmit(formData);
                     }
                     else {
-                        alert("Failed to submit the form!!!")
+                        handleSubmit && handleSubmit(formData as CreateBlogInput);
                     }
                 }}
                 className="max-w-3xl mx-auto mt-20 px-4">
@@ -58,7 +60,7 @@ export default function BlogForm({
                 {/* Button */}
                 <button type="submit" className="rounded-md bg-green-500 text-white px-2 py-1 border border-green-700 hover:cursor-pointer shadow">Confirm</button>
                 <button type="button" onClick={() => navigate(-1)} className="rounded-md bg-red-500 text-white px-2 py-1 border border-red-700 hover:cursor-pointer shadow mx-3">Cancel</button>
-            </form>
+            </form >
         </>
     );
 };
