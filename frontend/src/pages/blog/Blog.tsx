@@ -1,30 +1,30 @@
 import { useBlog } from "../../hooks/blog";
 import { useParams } from "react-router-dom";
 import Spinner from "../../components/ui/spinner";
+import BackBtn from "../../components/button/backBtn";
 import ShowBlog from "../../components/blog/showBlog";
-import BlogAuthor from "../../components/blog/blogAuthor";
 
 export default function Blog() {
     let params = useParams();
     const { blogData, isLoading } = useBlog(params.blogId || "");
     return (
         <>
-            {
-                isLoading ?
+            <section className="w-full h-full bg-white py-20 pb-16">
+                <div className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8">
+                    <BackBtn linkTo="/blogs" text="Back to blogs" />
+                </div>
+                {isLoading ?
                     <Spinner />
                     :
-                    <section className="flex flex-col xl:flex-row mx-6 sm:mx-16 md:mx-28 xl:mx-40 2xl:mx-56">
-                        <ShowBlog
-                            title={blogData.title}
-                            content={blogData.content}
-                            postedOn={blogData.postedOn}
-                        />
-                        <BlogAuthor
-                            authorName={blogData.authorName}
-                            authorBio={blogData.authorBio}
-                        />
-                    </section>
-            }
+                    <ShowBlog
+                        title={blogData.title}
+                        content={blogData.content}
+                        postedOn={blogData.postedOn}
+                        authorBio={blogData.authorBio}
+                        authorName={blogData.authorName}
+                    />
+                }
+            </section>
         </>
     );
 };

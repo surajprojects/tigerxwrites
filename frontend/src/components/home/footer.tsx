@@ -1,34 +1,47 @@
-import { GithubIcon, LinkedinIcon, TwitterIcon, YoutubeIcon } from "../icons";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     return (
         <>
-            <footer className="w-full h-32 sm:h-52 flex justify-center">
-                <div className="w-4/5 flex flex-col justify-center items-center">
-                    <div className="w-2/3 sm:w-2/5 lg:w-1/4 mb-0 sm:mb-5 pb-3 sm:pb-0 flex justify-around">
-                        <div className="size-6 sm:size-10">
-                            <a href="https://github.com/surajprojects" target="_blank">
-                                <GithubIcon />
-                            </a>
-                        </div>
-
-                        <div className="size-6 sm:size-10">
-                            <a href="https://www.linkedin.com/in/surajchauhan23" target="_blank">
-                                <LinkedinIcon />
-                            </a>
-                        </div>
-                        <div className="size-5 sm:size-8 pt-1">
-                            <a href="https://twitter.com/tigerxinsights" target="_blank">
-                                <TwitterIcon />
-                            </a>
-                        </div>
-                        <div className="size-6 sm:size-10">
-                            <a href="https://www.youtube.com/@tigerxinsights" target="_blank">
-                                <YoutubeIcon />
-                            </a>
-                        </div>
+            <footer className="w-full border-t border-[#ebe6e0] bg-[#fffdfc]">
+                <div className="flex flex-col md:flex-row justify-between mx-auto py-12 px-4 md:px-8 border-b border-[#ebe6e0] w-full xl:max-w-7xl">
+                    <div className="max-w-xs lg:max-w-sm">
+                        <h6 className="font-bold text-2xl text-orange-500">Tiger Writes</h6>
+                        <p className="text-[#7c706a] my-4">A platform for writers to share their stories, insights, and perspectives with a global audience.</p>
                     </div>
-                    <div className="text-sm sm:text-base text-black font-medium text-center flex flex-col items-center">
+                    <ul className="text-[#7c706a] my-5 w-fit md:my-auto">
+                        <li className="m-3 mb-4 text-black font-medium">Explore</li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>Featured</Link>
+                        </li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>Categories</Link>
+                        </li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>Writers</Link>
+                        </li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>About</Link>
+                        </li>
+                    </ul>
+                    <ul className="text-[#7c706a] w-fit mr-12">
+                        <li className="m-3 mb-4 text-black font-medium">Connect</li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>Twitter</Link>
+                        </li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>Instagram</Link>
+                        </li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>LinkedIn</Link>
+                        </li>
+                        <li className="m-3 hover:text-orange-500 duration-300 ease-out">
+                            <Link to={"#"}>Contact</Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className="flex flex-col justify-center items-center py-8 px-5">
+                    <div className="text-sm text-[#7c706a] font-medium text-center flex flex-col items-center">
                         <span>Made with ❤️ by TigerxInsights &copy; 2025</span>
                         <span>Your insights, our priority</span>
                     </div>

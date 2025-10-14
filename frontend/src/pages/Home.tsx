@@ -1,10 +1,47 @@
+import BlogCard from "../components/blog/blogCard";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+
 export default function Home() {
     return (
         <>
-            <div>
-                <h1 className="text-center text-5xl font-bold mt-10">Welcome to Tiger Writes</h1>
-                <p>This is the homepage!!!</p>
-            </div>
+            <section className="w-full pt-16 ">
+                {/* Hero Section */}
+                <div className="relative w-full">
+                    {/* Background Image */}
+                    <img
+                        src="/images/tiger-hero-page.jpg"
+                        alt="hero-section"
+                        className="w-full h-[38rem] object-cover"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/100 to-white/25"></div>
+                    {/* Content */}
+                    <div className="absolute inset-0 mx-auto w-full xl:max-w-7xl px-4 md:px-8 flex flex-col justify-center">
+                        <div>
+                            <h1 className="text-7xl font-bold flex flex-col">
+                                <span className="text-[#2a2522]">Where words</span>
+                                <span className="text-orange-500 mt-1">roar to life</span>
+                            </h1>
+                            <p className="text-[#7c706a] my-8 text-2xl max-w-xl">Discover stories, thinking, and expertise from writers on any topic that matters to you.</p>
+                            {/* CTA */}
+                            <button type="button" className="text-white text-sm bg-orange-500 py-3 px-8 rounded-md flex justify-center items-center font-medium hover:cursor-pointer hover:bg-orange-600 duration-300 ease-out">Start Reading<ArrowRightIcon className="w-4 h-4 ml-2" /></button>
+                        </div>
+                    </div>
+                </div>
+                {/* Featured Stories */}
+                <div className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8">
+                    <h3 className="text-4xl font-bold">Featured Stories</h3>
+                    <p className="text-[#7c706a] mt-4 text-lg">Curated reads from our community of passionate writers</p>
+                    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <BlogCard />
+                        <BlogCard />
+                        <BlogCard />
+                        <BlogCard />
+                        <BlogCard />
+                        <BlogCard />
+                    </div>
+                </div>
+            </section>
         </>
     );
 };

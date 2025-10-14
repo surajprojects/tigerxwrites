@@ -4,6 +4,7 @@ export interface Blog {
     id: string,
     title: string,
     content: string,
+    excerpt: string,
     published: boolean,
     authorId: string,
     author: User,
@@ -13,7 +14,7 @@ export interface Blog {
 
 export type Blogs = Blog[];
 
-export type BlogData = Pick<Blog, "id" | "title" | "content"> & {
+export type BlogData = Pick<Blog, "id" | "title" | "content" | "excerpt"> & {
     postedOn: string;
     authorName: string;
     authorBio?: string;

@@ -2091,6 +2091,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     content: string | null
+    excerpt: string | null
     published: boolean | null
     authorId: string | null
     createdAt: Date | null
@@ -2101,6 +2102,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     content: string | null
+    excerpt: string | null
     published: boolean | null
     authorId: string | null
     createdAt: Date | null
@@ -2111,6 +2113,7 @@ export namespace Prisma {
     id: number
     title: number
     content: number
+    excerpt: number
     published: number
     authorId: number
     createdAt: number
@@ -2123,6 +2126,7 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    excerpt?: true
     published?: true
     authorId?: true
     createdAt?: true
@@ -2133,6 +2137,7 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    excerpt?: true
     published?: true
     authorId?: true
     createdAt?: true
@@ -2143,6 +2148,7 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    excerpt?: true
     published?: true
     authorId?: true
     createdAt?: true
@@ -2226,6 +2232,7 @@ export namespace Prisma {
     id: string
     title: string
     content: string
+    excerpt: string
     published: boolean
     authorId: string
     createdAt: Date
@@ -2253,6 +2260,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    excerpt?: boolean
     published?: boolean
     authorId?: boolean
     createdAt?: boolean
@@ -2264,6 +2272,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    excerpt?: boolean
     published?: boolean
     authorId?: boolean
     createdAt?: boolean
@@ -2275,6 +2284,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    excerpt?: boolean
     published?: boolean
     authorId?: boolean
     createdAt?: boolean
@@ -2286,13 +2296,14 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    excerpt?: boolean
     published?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BlogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "published" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["blog"]>
+  export type BlogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "excerpt" | "published" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["blog"]>
   export type BlogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2312,6 +2323,7 @@ export namespace Prisma {
       id: string
       title: string
       content: string
+      excerpt: string
       published: boolean
       authorId: string
       createdAt: Date
@@ -2743,6 +2755,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Blog", 'String'>
     readonly title: FieldRef<"Blog", 'String'>
     readonly content: FieldRef<"Blog", 'String'>
+    readonly excerpt: FieldRef<"Blog", 'String'>
     readonly published: FieldRef<"Blog", 'Boolean'>
     readonly authorId: FieldRef<"Blog", 'String'>
     readonly createdAt: FieldRef<"Blog", 'DateTime'>
@@ -3192,6 +3205,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     content: 'content',
+    excerpt: 'excerpt',
     published: 'published',
     authorId: 'authorId',
     createdAt: 'createdAt',
@@ -3354,6 +3368,7 @@ export namespace Prisma {
     id?: StringFilter<"Blog"> | string
     title?: StringFilter<"Blog"> | string
     content?: StringFilter<"Blog"> | string
+    excerpt?: StringFilter<"Blog"> | string
     published?: BoolFilter<"Blog"> | boolean
     authorId?: StringFilter<"Blog"> | string
     createdAt?: DateTimeFilter<"Blog"> | Date | string
@@ -3365,6 +3380,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    excerpt?: SortOrder
     published?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
@@ -3379,6 +3395,7 @@ export namespace Prisma {
     NOT?: BlogWhereInput | BlogWhereInput[]
     title?: StringFilter<"Blog"> | string
     content?: StringFilter<"Blog"> | string
+    excerpt?: StringFilter<"Blog"> | string
     published?: BoolFilter<"Blog"> | boolean
     authorId?: StringFilter<"Blog"> | string
     createdAt?: DateTimeFilter<"Blog"> | Date | string
@@ -3390,6 +3407,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    excerpt?: SortOrder
     published?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
@@ -3406,6 +3424,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Blog"> | string
     title?: StringWithAggregatesFilter<"Blog"> | string
     content?: StringWithAggregatesFilter<"Blog"> | string
+    excerpt?: StringWithAggregatesFilter<"Blog"> | string
     published?: BoolWithAggregatesFilter<"Blog"> | boolean
     authorId?: StringWithAggregatesFilter<"Blog"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Blog"> | Date | string
@@ -3490,6 +3509,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    excerpt: string
     published?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3500,6 +3520,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    excerpt: string
     published?: boolean
     authorId: string
     createdAt?: Date | string
@@ -3510,6 +3531,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3520,6 +3542,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3530,6 +3553,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    excerpt: string
     published?: boolean
     authorId: string
     createdAt?: Date | string
@@ -3540,6 +3564,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3549,6 +3574,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3705,6 +3731,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    excerpt?: SortOrder
     published?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
@@ -3715,6 +3742,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    excerpt?: SortOrder
     published?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
@@ -3725,6 +3753,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    excerpt?: SortOrder
     published?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
@@ -3937,6 +3966,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    excerpt: string
     published?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3946,6 +3976,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    excerpt: string
     published?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3984,6 +4015,7 @@ export namespace Prisma {
     id?: StringFilter<"Blog"> | string
     title?: StringFilter<"Blog"> | string
     content?: StringFilter<"Blog"> | string
+    excerpt?: StringFilter<"Blog"> | string
     published?: BoolFilter<"Blog"> | boolean
     authorId?: StringFilter<"Blog"> | string
     createdAt?: DateTimeFilter<"Blog"> | Date | string
@@ -4050,6 +4082,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    excerpt: string
     published?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4059,6 +4092,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4068,6 +4102,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4077,6 +4112,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    excerpt?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

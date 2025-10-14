@@ -3,6 +3,7 @@ import { useBlog } from "../../hooks/blog";
 import axiosInstance from "../../utils/axios";
 import Spinner from "../../components/ui/spinner";
 import type { Blog } from "../../utils/types/blog";
+import BackBtn from "../../components/button/backBtn";
 import BlogForm from "../../components/blog/blogForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { errorHandle } from "../../utils/errors/errorHandle";
@@ -24,21 +25,28 @@ export default function EditBlog() {
     };
     return (
         <>
-            {
-                isLoading ?
-                    <Spinner />
-                    :
-                    <section>
+            <section className="w-full h-full bg-white py-20">
+                <div className="mx-auto w-full xl:max-w-7xl px-4 py-10 md:px-8">
+                    <BackBtn linkTo="/blogs" text="Back to blogs" />
+                </div>
+                <div className="px-4 md:px-8">
+                    {isLoading ?
+                        <Spinner />
+                        :
                         <BlogForm
-                            handleEditSubmit={handleSubmit}
                             isEdit={true}
+                            btnTitle="Update Story"
+                            title="Edit Your Story"
+                            handleSubmit={handleSubmit}
                             initialData={{
                                 title: blogData.title,
+                                excerpt: "",
                                 content: blogData.content,
                             }}
                         />
-                    </section>
-            }
+                    }
+                </div>
+            </section>
         </>
     );
 };

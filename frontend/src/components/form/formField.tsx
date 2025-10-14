@@ -8,6 +8,10 @@ export default function FormField({
     isTextHolder = true,
     textHolder = "Enter your name",
     fieldValue,
+    showMessage = false,
+    isSuccess = true,
+    msgSuccess = "Alright! Username available!",
+    msgError = "Oops! Username already taken!",
     onChangeFunc,
 }: {
     id?: string,
@@ -17,14 +21,18 @@ export default function FormField({
     isTextHolder?: boolean,
     textHolder?: string,
     fieldValue: string,
+    showMessage?: boolean,
+    isSuccess?: boolean,
+    msgSuccess?: string,
+    msgError?: string,
     onChangeFunc: (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 }) {
     return (
         <>
             {
                 isTextHolder ?
-                    <div className="flex flex-col my-1 sm:my-2">
-                        <label htmlFor={id} className="font-semibold text-sm sm:text-base">{title}</label>
+                    <div className="flex flex-col my-3">
+                        <label htmlFor={id} className="font-sans font-medium text-sm text-[#2a2522]">{title}</label>
                         <input
                             type={fieldType}
                             name={id}
@@ -33,12 +41,17 @@ export default function FormField({
                             onChange={onChangeFunc}
                             placeholder={textHolder}
                             required={isRequired}
-                            className="border border-gray-300 rounded-md px-2 sm:px-3 py-1 sm:py-2 my-2 text-sm"
+                            className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm focus:outline-orange-500 focus:outline-2 focus:outline-offset-2 duration-75 ease-out"
                         />
+                        {showMessage && (isSuccess ?
+                            <p className="mt-2 text-sm text-green-600 dark:text-green-500">{msgSuccess}</p>
+                            :
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">{msgError}</p>)
+                        }
                     </div>
                     :
-                    <div className="flex flex-col my-2">
-                        <label htmlFor={id} className="font-semibold">{title}</label>
+                    <div className="flex flex-col my-3">
+                        <label htmlFor={id} className="font-sans font-medium text-sm text-[#2a2522]">{title}</label>
                         <input
                             type={fieldType}
                             name={id}
@@ -46,8 +59,13 @@ export default function FormField({
                             value={fieldValue}
                             onChange={onChangeFunc}
                             required={isRequired}
-                            className="border border-gray-300 rounded-md px-3 py-2 my-2"
+                            className="border border-gray-300 rounded-md font-sans font-normal text-[#2a2522] px-3 py-2 my-2 text-sm focus:outline-orange-500 focus:outline-2 focus:outline-offset-2 duration-75 ease-out"
                         />
+                        {showMessage && (isSuccess ?
+                            <p className="mt-2 text-sm text-green-600 dark:text-green-500">{msgSuccess}</p>
+                            :
+                            <p className="mt-2 text-sm text-red-600 dark:text-red-500">{msgError}</p>)
+                        }
                     </div>
             }
         </>

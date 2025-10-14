@@ -8,6 +8,7 @@ export function useBlog(blogId: string) {
     const [blogData, setBlogData] = useState<BlogData>({
         id: "",
         title: "",
+        excerpt: "",
         content: "",
         postedOn: "",
         authorName: "",
@@ -22,6 +23,7 @@ export function useBlog(blogId: string) {
                 setBlogData((prevData) => {
                     return {
                         ...prevData,
+                        id: blogData.id,
                         title: blogData.title,
                         content: blogData.content,
                         postedOn: blogData.createdAt.split("T")[0],

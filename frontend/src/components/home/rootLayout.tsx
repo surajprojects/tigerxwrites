@@ -8,11 +8,11 @@ export default function RootLayout() {
         <>
             <div className="flex flex-col min-h-screen">
                 <Header />
-                <main className="flex flex-1 justify-center">
+                <main className="flex flex-1 justify-center bg-[#fffcfa]">
                     <Outlet />
                 </main>
                 <Footer />
-                <ToastContainer theme="light" position="top-center" />
+                <ToastContainer theme="light" position="bottom-right" />
             </div>
         </>
     );
