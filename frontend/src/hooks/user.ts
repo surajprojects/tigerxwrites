@@ -1,6 +1,5 @@
 import axiosInstance from "../utils/axios";
 import { useEffect, useState } from "react";
-import { errorHandle } from "../utils/errors/errorHandle";
 
 export function useUser() {
     const [isLoading, setIsLoading] = useState<Boolean>(false);
@@ -12,7 +11,7 @@ export function useUser() {
                 const result = await axiosInstance.get("/user/me");
                 setUserId(result.data.userId);
             } catch (error) {
-                errorHandle(error);
+                console.error(error);
             }
             setIsLoading(false);
         }
