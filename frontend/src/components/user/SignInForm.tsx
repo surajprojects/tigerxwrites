@@ -63,7 +63,7 @@ export default function SignInForm({
                             onChangeFunc={handleChange}
                         />
                         {/* Button */}
-                        <Btn btnType="submit" text="Sign In" isLoading={isLoading} />
+                        <Btn btnType="submit" text="Sign In" isLoading={isLoading} btnDisabled={isLoading} />
                         <div className="flex justify-center items-center mt-2">
                             <FormAction linkTo="/signup" />
                         </div>

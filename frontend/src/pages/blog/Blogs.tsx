@@ -1,8 +1,10 @@
+import { useUser } from "../../hooks/user";
 import { useBlogs } from "../../hooks/blogs";
 import Spinner from "../../components/ui/spinner";
 import BlogCard from "../../components/blog/blogCard";
 
 export default function Blogs() {
+    const { userId } = useUser();
     const { blogsData, isLoading } = useBlogs();
     return (
         <>
@@ -25,10 +27,11 @@ export default function Blogs() {
                                     content={blog.content}
                                     authorName={blog.author.name}
                                     postedOn={blog.createdAt.split("T")[0]}
+                                    showBtns={userId === blog.author.id ? true : false}
                                 />
                             })
                                 :
-                                <p>No blogs found!!!</p>
+                                <p className="text-[#7c706a] my-4 text-base italic">No blogs found!!!</p>
                             }
                         </div>
                     }

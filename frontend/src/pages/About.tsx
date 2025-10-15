@@ -34,7 +34,10 @@ export default function About() {
                     {/* Get in Touch */}
                     <div className="border-t border-[#ebe6e0] py-8">
                         <p className="text-lg font-medium font-sans mb-6">Have questions or want to collaborate?</p>
-                        <ContactBtn />
+                        <ContactBtn
+                            newTab={true}
+                            hrefLink="https://www.tigerxinsights.com/contact"
+                        />
                     </div>
                 </div>
             </section>

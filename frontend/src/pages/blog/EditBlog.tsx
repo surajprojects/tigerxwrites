@@ -21,6 +21,8 @@ export default function EditBlog() {
             toast.success("Blog updated successfully!!!");
         } catch (error) {
             errorHandle(error);
+        } finally {
+            return true;
         }
     };
     return (
@@ -40,7 +42,7 @@ export default function EditBlog() {
                             handleSubmit={handleSubmit}
                             initialData={{
                                 title: blogData.title,
-                                excerpt: "",
+                                excerpt: blogData.excerpt,
                                 content: blogData.content,
                             }}
                         />

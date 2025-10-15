@@ -14,17 +14,14 @@ export default function BlogForm({
         content: "",
     },
 }: {
-    handleSubmit?: (formData: CreateBlogInput) => void,
-    handleEditSubmit?: (formData: UpdateBlogInput) => void,
+    handleSubmit?: (formData: CreateBlogInput) => Promise<boolean>,
+    handleEditSubmit?: (formData: UpdateBlogInput) => Promise<boolean>,
     isEdit?: boolean,
     title?: string,
     btnTitle?: string,
-    initialData?: {
-        title: string,
-        excerpt: string,
-        content: string,
-    },
+    initialData?: CreateBlogInput,
 }) {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [formData, setFormData] = useState(initialData);
     const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const fieldName = evt.target.name;
@@ -40,13 +37,15 @@ export default function BlogForm({
         <>
             <form
                 onSubmit={async (evt) => {
+                    setIsLoading(true);
                     evt.preventDefault();
                     if (isEdit && handleEditSubmit) {
-                        handleEditSubmit(formData);
+                        await handleEditSubmit(formData);
                     }
                     else {
-                        handleSubmit && handleSubmit(formData as CreateBlogInput);
+                        handleSubmit && await handleSubmit(formData as CreateBlogInput);
                     }
+                    setIsLoading(false);
                 }}
                 className="w-full md:w-3xl mx-auto rounded-lg border border-[#ebe6e0] shadow-xs p-6"
             >
@@ -91,7 +90,7 @@ export default function BlogForm({
                         className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm focus:outline-orange-500 focus:outline-2 focus:outline-offset-2 duration-75 ease-out min-h-72"
                     ></textarea>
                 </div>
-                <Btn btnType="submit" text={btnTitle} />
+                <Btn btnType="submit" text={btnTitle} isLoading={isLoading} btnDisabled={isLoading} />
             </form >
         </>
     );

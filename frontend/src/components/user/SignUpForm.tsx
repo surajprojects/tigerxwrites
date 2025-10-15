@@ -98,7 +98,7 @@ export default function SignUpForm({
                             msgError="Password doesn't match!"
                         />
                         {/* Button */}
-                        <Btn btnType="submit" text="Create Account" isLoading={isLoading} />
+                        <Btn btnType="submit" text="Create Account" isLoading={isLoading} btnDisabled={isLoading} />
                         <div className="flex justify-center items-center mt-2">
                             <FormAction
                                 linkTo="/signin"

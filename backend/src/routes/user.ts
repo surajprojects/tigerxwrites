@@ -1,11 +1,12 @@
 import { Hono } from "hono";
 import bcrypt from "bcryptjs";
 import jwtLib from "jsonwebtoken";
-import { Bindings, Variables } from "../utils/init";
 import { initPrisma } from "../utils/db";
+import { handleError } from "../utils/error";
+import { Bindings, Variables } from "../utils/init";
 import { setCookie, deleteCookie } from "hono/cookie";
 import { SignInInput, signInInput, SignUpInput, signUpInput } from "@tigerxinsights/tigerxwrites";
-import { handleError } from "../utils/error";
+import { blogAuth } from "../middlewares/blogAuth";
 
 // User router (handles authentication & session management)
 export const userRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
@@ -15,6 +16,15 @@ export const userRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>
  * - Clears auth cookie
  * - Ends user session
  */
+userRouter.get("/me", blogAuth, async (c) => {
+    try {
+        const userId = c.get("userId");
+        return c.json({ message: "User authentication successful!!!", userId });
+    } catch (error) {
+        return c.json(handleError(error, c));
+    }
+});
+
 userRouter.get("/signout", async (c) => {
     try {
         deleteCookie(c, "token", {
@@ -113,19 +123,12 @@ userRouter.post("/signin", async (c) => {
         // generate JWT
         const token = await jwtLib.sign({ id: user.id }, c.env.JWT_SECRET, { expiresIn: "1h" });
         // set cookie
-        // setCookie(c, "token", token, {
-        //     httpOnly: true,
-        //     secure: true,
-        //     sameSite: "None",
-        //     maxAge: 60 * 60,
-        //     path: "/api/v1",
-        // });
         setCookie(c, "token", token, {
             httpOnly: true,
-            secure: false,   // ❌ disable HTTPS-only
-            sameSite: "Lax", // ✅ safer for dev
+            secure: true,
+            sameSite: "None",
             maxAge: 60 * 60,
-            path: "/",       // ✅ available everywhere
+            path: "/api/v1",
         });
         return c.json({ message: "Sign In successful!!!" });
     }
@@ -133,3 +136,11 @@ userRouter.post("/signin", async (c) => {
         return c.json(handleError(error, c));
     }
 });
+
+// setCookie(c, "token", token, {
+//     httpOnly: true,
+//     secure: false,   // ❌ disable HTTPS-only
+//     sameSite: "Lax", // ✅ safer for dev
+//     maxAge: 60 * 60,
+//     path: "/",       // ✅ available everywhere
+// });

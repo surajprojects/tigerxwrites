@@ -39,7 +39,7 @@ export default function ShowBlog({
                     />
                     <div className="mx-4 font-sans">
                         <p className="font-bold text-[#2a2522] text-lg">{authorName}</p>
-                        <p className="text-[#7c706a] mt-2">{authorBio}</p>
+                        <p className="text-[#7c706a] mt-2">{authorBio ? authorBio : "Digital media strategist and writer exploring the intersection of technology and human connection."}</p>
                     </div>
                 </div>
             </div>

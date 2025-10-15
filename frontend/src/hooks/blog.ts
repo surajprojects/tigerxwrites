@@ -25,6 +25,7 @@ export function useBlog(blogId: string) {
                         ...prevData,
                         id: blogData.id,
                         title: blogData.title,
+                        excerpt: blogData.excerpt,
                         content: blogData.content,
                         postedOn: blogData.createdAt.split("T")[0],
                         authorName: blogData.author.name,

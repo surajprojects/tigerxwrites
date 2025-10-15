@@ -1,9 +1,9 @@
 import { Hono } from "hono";
 import { initPrisma } from "../utils/db";
-import { Bindings, Variables } from "../utils/init";
-import { blogAuth } from "../middlewares/blogAuth";
-import { createBlogInput, CreateBlogInput, updateBlogInput, UpdateBlogInput } from "@tigerxinsights/tigerxwrites";
 import { handleError } from "../utils/error";
+import { blogAuth } from "../middlewares/blogAuth";
+import { Bindings, Variables } from "../utils/init";
+import { createBlogInput, CreateBlogInput, updateBlogInput, UpdateBlogInput } from "@tigerxinsights/tigerxwrites";
 
 // Blog router (handles CRUD for blogs)
 export const blogRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
@@ -16,6 +16,7 @@ blogRouter.get("/bulk", async (c) => {
             include: {
                 author: {
                     select: {
+                        id: true,
                         name: true,
                     }
                 }
@@ -42,6 +43,7 @@ blogRouter.get("/:id", async (c) => {
             include: {
                 author: {
                     select: {
+                        id: true,
                         name: true,
                         bio: true,
                     }
@@ -76,6 +78,7 @@ blogRouter.post("/", async (c) => {
         const blogData = await prisma.blog.create({
             data: {
                 title: body.title,
+                excerpt: body.excerpt,
                 content: body.content,
                 authorId: userId,
             },
@@ -106,6 +109,7 @@ blogRouter.patch("/:id", async (c) => {
             },
             data: {
                 ...(parsedInput.data.title && { title: parsedInput.data.title }),
+                ...(parsedInput.data.excerpt && { excerpt: parsedInput.data.excerpt }),
                 ...(parsedInput.data.content && { content: parsedInput.data.content }),
             }
         });
