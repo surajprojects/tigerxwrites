@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
 export default function Header() {
@@ -11,13 +11,28 @@ export default function Header() {
                     </div>
                     <ul className="hidden md:flex text-[#7c706a] text-sm">
                         <li className="mx-3 hover:text-orange-500 duration-300 ease-out">
-                            <Link to={"/"}>Home</Link>
+                            <NavLink
+                                to={"/"}
+                                className={({ isActive }) => isActive ? "text-orange-500" : ""}
+                            >
+                                Home
+                            </NavLink>
                         </li>
                         <li className="mx-3 hover:text-orange-500 duration-300 ease-out">
-                            <Link to={"/blogs"}>All Blogs</Link>
+                            <NavLink
+                                to={"/blogs"}
+                                className={({ isActive }) => isActive ? "text-orange-500" : ""}
+                            >
+                                All Blogs
+                            </NavLink>
                         </li>
                         <li className="mx-3 hover:text-orange-500 duration-300 ease-out">
-                            <Link to={"/about"}>About</Link>
+                            <NavLink
+                                to={"/about"}
+                                className={({ isActive }) => isActive ? "text-orange-500" : ""}
+                            >
+                                About
+                            </NavLink>
                         </li>
                     </ul>
                     <ul className="flex text-sm">
