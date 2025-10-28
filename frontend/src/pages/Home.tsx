@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useBlogs } from "../hooks/blogs";
-import Spinner from "../components/ui/spinner";
 import BlogCard from "../components/blog/blogCard";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import BlogSkeletonCard from "../components/blog/blogSkeletonCard";
 
 export default function Home() {
     const { blogsData, isLoading } = useBlogs();
@@ -41,7 +41,14 @@ export default function Home() {
                     <h3 className="text-4xl font-bold">Featured Stories</h3>
                     <p className="text-[#7c706a] mt-4 text-lg">Curated reads from our community of passionate writers</p>
                     {isLoading ?
-                        <Spinner />
+                        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <BlogSkeletonCard key={1} />
+                            <BlogSkeletonCard key={2} />
+                            <BlogSkeletonCard key={3} />
+                            <BlogSkeletonCard key={4} />
+                            <BlogSkeletonCard key={5} />
+                            <BlogSkeletonCard key={6} />
+                        </div>
                         :
                         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {blogsData.length > 0 ? blogsData.map((blog, idx) => {

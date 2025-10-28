@@ -1,7 +1,7 @@
 import { useUser } from "../../hooks/user";
 import { useBlogs } from "../../hooks/blogs";
-import Spinner from "../../components/ui/spinner";
 import BlogCard from "../../components/blog/blogCard";
+import BlogSkeletonCard from "../../components/blog/blogSkeletonCard";
 
 export default function Blogs() {
     const { userId } = useUser();
@@ -15,7 +15,14 @@ export default function Blogs() {
                         <p className="text-lg text-[#7c706a] my-5">Discover insights and perspectives from our community</p>
                     </div>
                     {isLoading ?
-                        <Spinner />
+                        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <BlogSkeletonCard key={1} />
+                            <BlogSkeletonCard key={2} />
+                            <BlogSkeletonCard key={3} />
+                            <BlogSkeletonCard key={4} />
+                            <BlogSkeletonCard key={5} />
+                            <BlogSkeletonCard key={6} />
+                        </div>
                         :
                         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {blogsData.length > 0 ? blogsData.map((blog, idx) => {

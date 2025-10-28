@@ -21,7 +21,7 @@ export default function Footer() {
                             <Link to={"#"}>Writers</Link>
                         </li>
                         <li className="m-3 hover:text-orange-500 duration-300 ease-out">
-                            <Link to={"/about"}>About</Link>
+                            <Link to={"/about/#"}>About</Link>
                         </li>
                     </ul>
                     <ul className="text-[#7c706a] w-fit mr-12">
@@ -36,7 +36,7 @@ export default function Footer() {
                             <Link to={"#"}>LinkedIn</Link>
                         </li>
                         <li className="m-3 hover:text-orange-500 duration-300 ease-out">
-                            <a href="https://www.tigerxinsights.com/contact" target="_blank">Contact</a>
+                            <a href="https://tigerxinsights.com/#contact" target="_blank">Contact</a>
                         </li>
                     </ul>
                 </div>
