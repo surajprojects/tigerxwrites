@@ -8,9 +8,12 @@ import { createBlogInput, CreateBlogInput, updateBlogInput, UpdateBlogInput } fr
 // Blog router (handles CRUD for blogs)
 export const blogRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 
-// GET /bulk - fetch all blogs
-blogRouter.get("/bulk", async (c) => {
+// GET /page/:pageNumber - fetch all blogs by page number
+blogRouter.get("/page/:pageNumber", async (c) => {
     try {
+        const page = c.req.param("pageNumber");
+        const take = 9;
+        const skip = (Number(page) - 1) * take;
         const prisma = initPrisma(c);
         const bulkBlogs = await prisma.blog.findMany({
             include: {
@@ -20,13 +23,19 @@ blogRouter.get("/bulk", async (c) => {
                         name: true,
                     }
                 }
-            }
+            },
+            skip,
+            take,
         });
         if (bulkBlogs.length < 1) {
             c.status(404);
             return c.json({ message: "Blogs not found!!!" });
         };
-        return c.json({ message: "Successfully found all blogs!!!", bulkBlogs });
+        if (!c.get("blogCount")) {
+            c.set("blogCount", await prisma.blog.count());
+        };
+        const blogsCount = c.get("blogCount");
+        return c.json({ message: "Successfully found all blogs!!!", bulkBlogs, blogsCount });
     }
     catch (error) {
         return c.json(handleError(error, c));
@@ -83,6 +92,7 @@ blogRouter.post("/", async (c) => {
                 authorId: userId,
             },
         });
+        c.set("blogCount", await prisma.blog.count());
         return c.json({ message: "Successfully created the blog!!!", blogData });
     }
     catch (error) {
@@ -132,6 +142,7 @@ blogRouter.delete("/:id", async (c) => {
                 authorId: userId,
             },
         });
+        c.set("blogCount", await prisma.blog.count());
         return c.json({ message: "Successfully deleted the blog!!!" });
     }
     catch (error) {

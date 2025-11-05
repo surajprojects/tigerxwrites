@@ -15,6 +15,7 @@ export type Bindings = {
  */
 export type Variables = {
     userId: string;
+    blogCount: number;
 };
 
 /**

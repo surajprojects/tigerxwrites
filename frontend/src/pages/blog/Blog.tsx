@@ -18,6 +18,7 @@ export default function Blog() {
                     :
                     <ShowBlog
                         title={blogData.title}
+                        excerpt={blogData.excerpt}
                         content={blogData.content}
                         postedOn={blogData.postedOn}
                         authorBio={blogData.authorBio}

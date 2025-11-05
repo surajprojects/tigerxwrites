@@ -2,10 +2,13 @@ import { useUser } from "../../hooks/user";
 import { useBlogs } from "../../hooks/blogs";
 import BlogCard from "../../components/blog/blogCard";
 import BlogSkeletonCard from "../../components/blog/blogSkeletonCard";
+import getPageWindow from "../../utils/pagination/pageWindow";
+import { useState } from "react";
 
 export default function Blogs() {
     const { userId } = useUser();
-    const { blogsData, isLoading } = useBlogs();
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const { blogsData, isLoading, totalPages } = useBlogs(currentPage);
     return (
         <>
             <section className="w-full bg-white py-20 pb-10">
@@ -42,8 +45,35 @@ export default function Blogs() {
                             }
                         </div>
                     }
+                    <div className="mt-8 flex">
+                        <button
+                            onClick={() => {
+                                if (currentPage > 1) {
+                                    setCurrentPage((prevData) => prevData - 1)
+                                }
+                            }
+                            }
+                            className="bg-orange-500 font-sans text-white text-sm font-semibold px-4 py-2 rounded-md hover:cursor-pointer hover:bg-orange-500/90 duration-300 ease-out outline-none">Prev</button>
+                        <ul className="flex gap-4 mx-4 items-center">
+                            {getPageWindow(currentPage, totalPages).map((num, idx) => {
+                                return <li
+                                    key={idx}
+                                    onClick={() => setCurrentPage(num)}
+                                    className={currentPage === num ? "text-white bg-orange-500/90 border-orange-500 border duration-300 ease-out cursor-pointer rounded-md px-3 py-1 font-sans font-semibold text-sm" : "border border-gray-500 hover:border-orange-500 duration-300 ease-out cursor-pointer rounded-md px-3 py-1 font-sans font-semibold text-sm hover:bg-orange-500/90 hover:text-white"}>
+                                    {num}
+                                </li>
+                            })}
+                        </ul>
+                        <button
+                            onClick={() => {
+                                if (currentPage < totalPages) {
+                                    setCurrentPage((prevData) => prevData + 1)
+                                }
+                            }}
+                            className="bg-orange-500 font-sans text-white text-sm font-semibold px-4 py-2 rounded-md hover:cursor-pointer hover:bg-orange-500/90 duration-300 ease-out outline-none">Next</button>
+                    </div>
                 </div>
-            </section>
+            </section >
         </>
     );
 };

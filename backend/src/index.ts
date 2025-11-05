@@ -10,6 +10,7 @@ const app = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 // Enable CORS for frontend
 app.use("/api/*", cors({
     origin: "https://tigerxwrites.vercel.app",
+    // origin: "http://localhost:5173",
     credentials: true,
 }));
 

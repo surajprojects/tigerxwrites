@@ -5,6 +5,7 @@ import type { BlogData } from "../../utils/types/blog";
 
 export default function ShowBlog({
     title = "Title",
+    excerpt = "Excerpt",
     content = "Content",
     postedOn = "2025-10-08",
     authorName = "Author Name",
@@ -31,6 +32,7 @@ export default function ShowBlog({
                         <ReadTime content={content} />
                     </div>
                 </div>
+                <p className="text-slate-800 leading-7 my-8">{excerpt}</p>
                 <p className="text-slate-800 leading-7 my-8 mb-10">{content}</p>
                 <div className="flex items-center border-t border-[#ebe6e0] pt-8">
                     <UserAvatar
