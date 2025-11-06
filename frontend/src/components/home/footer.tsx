@@ -12,16 +12,16 @@ export default function Footer() {
                     <ul className="text-[#7c706a] my-5 w-fit md:my-auto">
                         <li className="m-3 mb-4 text-black font-medium">Explore</li>
                         <li className="m-3 hover:text-orange-500 duration-300 ease-out">
-                            <Link to={"#"}>Featured</Link>
+                            <Link to={"/#featured"}>Featured</Link>
                         </li>
                         <li className="m-3 hover:text-orange-500 duration-300 ease-out">
-                            <Link to={"#"}>Categories</Link>
+                            <Link to={"/blogs"}>All Blogs</Link>
                         </li>
                         <li className="m-3 hover:text-orange-500 duration-300 ease-out">
                             <Link to={"#"}>Writers</Link>
                         </li>
                         <li className="m-3 hover:text-orange-500 duration-300 ease-out">
-                            <Link to={"/about/#"}>About</Link>
+                            <Link to={"/about"}>About</Link>
                         </li>
                     </ul>
                     <ul className="text-[#7c706a] w-fit mr-12">

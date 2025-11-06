@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useBlogs } from "../hooks/blogs";
 import BlogCard from "../components/blog/blogCard";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -10,6 +10,13 @@ export default function Home() {
     const scrollToAbout = () => {
         aboutRef.current?.scrollIntoView({ behavior: "smooth" });
     };
+    useEffect(() => {
+        if (window.location.hash === "#featured") {
+            setTimeout(() => {
+                scrollToAbout();
+            }, 200);
+        }
+    }, []);
     return (
         <>
             <section className="w-full pt-16 ">
@@ -37,7 +44,7 @@ export default function Home() {
                     </div>
                 </div>
                 {/* Featured Stories */}
-                <div ref={aboutRef} className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8">
+                <div id="featured" ref={aboutRef} className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8 scroll-mt-8">
                     <h3 className="text-4xl font-bold">Featured Stories</h3>
                     <p className="text-[#7c706a] mt-4 text-lg">Curated reads from our community of passionate writers</p>
                     {isLoading ?
