@@ -19,7 +19,7 @@ export default function Home() {
     }, []);
     return (
         <>
-            <section className="w-full pt-16 ">
+            <section className="w-full pt-[3.8rem]">
                 {/* Hero Section */}
                 <div className="relative w-full">
                     {/* Background Image */}

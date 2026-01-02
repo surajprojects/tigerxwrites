@@ -4,7 +4,7 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 export default function Header() {
     return (
         <>
-            <header className="w-full font-sans font-medium fixed top-0 left-0 z-50 bg-white/30 backdrop-blur-sm border-b border-white/20 shadow-sm">
+            <header className="w-full font-sans font-medium fixed top-0 left-0 z-50 bg-white/30 backdrop-blur-sm border-b border-white/10 shadow-sm">
                 <nav className="flex justify-between items-center px-4 md:px-8 py-3 mx-auto w-full xl:max-w-7xl">
                     <div className="text-2xl font-bold whitespace-nowrap shrink text-orange-500">
                         <Link to={"/"}>Tiger Writes</Link>

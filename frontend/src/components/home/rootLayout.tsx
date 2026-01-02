@@ -1,8 +1,8 @@
 import Header from "./header";
 import Footer from "./footer";
 import { Outlet } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import ScrollToTop from "../ui/scrollToTop";
+import { ToastContainer } from "react-toastify";
 
 export default function RootLayout() {
     return (
