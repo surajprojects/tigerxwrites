@@ -7,6 +7,7 @@ import { Context } from "hono";
 export type Bindings = {
     DATABASE_URL: string;
     JWT_SECRET: string;
+    SECRET_KEY: string;
 };
 
 /**

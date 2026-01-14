@@ -3,10 +3,11 @@ import bcrypt from "bcryptjs";
 import jwtLib from "jsonwebtoken";
 import { initPrisma } from "../utils/db";
 import { handleError } from "../utils/error";
+import { blogAuth } from "../middlewares/blogAuth";
 import { Bindings, Variables } from "../utils/init";
 import { setCookie, deleteCookie } from "hono/cookie";
+import { verifyCaptcha } from "../middlewares/verifyCaptcha";
 import { SignInInput, signInInput, SignUpInput, signUpInput } from "@tigerxinsights/tigerxwrites";
-import { blogAuth } from "../middlewares/blogAuth";
 
 // User router (handles authentication & session management)
 export const userRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
@@ -43,12 +44,13 @@ userRouter.get("/signout", async (c) => {
  * - Creates user in DB
  * - Issues JWT & sets auth cookie
  */
-userRouter.post("/signup", async (c) => {
+userRouter.post("/signup", verifyCaptcha, async (c) => {
     try {
         const prisma = initPrisma(c);
         // Validate request body
-        const body: SignUpInput = await c.req.json();
-        const parsedInput = signUpInput.safeParse(body);
+        const body = await c.req.json<{ captchaToken?: string } & SignUpInput>();
+        const { captchaToken, ...signInInputData } = body;
+        const parsedInput = signUpInput.safeParse(signInInputData);
         if (!parsedInput.success) {
             c.status(400);
             return c.json({ message: "Invalid input!!!", details: parsedInput.error.issues });
