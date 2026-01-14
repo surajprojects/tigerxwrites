@@ -1,9 +1,10 @@
 import Btn from "../button/btn";
 import FormField from "../form/formField";
 import FormHeader from "../form/formHeader";
+import FormAction from "../form/formAction";
 import { useState, type ChangeEvent } from "react";
 import type { SignInInput } from "@tigerxinsights/tigerxwrites";
-import FormAction from "../form/formAction";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export default function SignInForm({
     handleSubmit
@@ -17,6 +18,8 @@ export default function SignInForm({
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [formData, setFormData] = useState<SignInInput>(initialData);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+
 
     const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const fieldName = evt.target.name;
@@ -57,11 +60,19 @@ export default function SignInForm({
                         <FormField
                             id="password"
                             title="Password"
-                            fieldType="password"
                             textHolder="••••••••"
                             fieldValue={formData.password}
+                            fieldType={showPassword ? "text" : "password"}
                             onChangeFunc={handleChange}
-                        />
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword((prevData) => !prevData)}
+                                className="inline px-0.5 cursor-pointer"
+                            >
+                                {showPassword ? <EyeIcon className="size-4" /> : <EyeSlashIcon className="size-4" />}
+                            </button>
+                        </FormField>
                         {/* Button */}
                         <Btn btnType="submit" text="Sign In" isLoading={isLoading} btnDisabled={isLoading} />
                         <div className="flex justify-center items-center mt-2">

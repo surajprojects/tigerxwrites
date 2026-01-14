@@ -7,9 +7,9 @@ import type { SignUpInput } from "@tigerxinsights/tigerxwrites";
 
 export default function SignUp() {
     const navigate = useNavigate();
-    const handleSubmit = async (formData: SignUpInput) => {
+    const handleSubmit = async (formData: SignUpInput, captchaToken: string | undefined) => {
         try {
-            await axiosInstance.post("user/signup", formData);
+            await axiosInstance.post("user/signup", { ...formData, captchaToken });
             navigate("/blogs");
             toast.success("Sign Up successfull!!!");
         } catch (error) {

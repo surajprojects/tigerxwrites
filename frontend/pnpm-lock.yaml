@@ -32,6 +32,9 @@ importers:
       react-toastify:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react-turnstile:
+        specifier: ^1.1.4
+        version: 1.1.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       tailwindcss:
         specifier: ^4.1.13
         version: 4.1.13
@@ -1493,6 +1496,12 @@ packages:
     peerDependencies:
       react: ^18 || ^19
       react-dom: ^18 || ^19
+
+  react-turnstile@1.1.4:
+    resolution: {integrity: sha512-oluyRWADdsufCt5eMqacW4gfw8/csr6Tk+fmuaMx0PWMKP1SX1iCviLvD2D5w92eAzIYDHi/krUWGHhlfzxTpQ==}
+    peerDependencies:
+      react: '>= 16.13.1'
+      react-dom: '>= 16.13.1'
 
   react@19.1.1:
     resolution: {integrity: sha512-w8nqGImo45dmMIfljjMwOGtbmC/mk4CMYhWIicdSflH91J9TyCyczcPFXJzrZ/ZXcgGRFeP6BU0BEJTw6tZdfQ==}
@@ -3022,6 +3031,11 @@ snapshots:
   react-toastify@11.0.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       clsx: 2.1.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  react-turnstile@1.1.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
 

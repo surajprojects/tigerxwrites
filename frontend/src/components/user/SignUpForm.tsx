@@ -1,17 +1,20 @@
 import Btn from "../button/btn";
+import Turnstile from "react-turnstile";
 import FormField from "../form/formField";
 import FormHeader from "../form/formHeader";
 import FormAction from "../form/formAction";
 import { useState, type ChangeEvent } from "react";
 import type { SignUpInput } from "@tigerxinsights/tigerxwrites";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export type SignUpFormInput = Pick<SignUpInput, "email" | "name" | "password"> & { confirmPassword: string };
 
 export default function SignUpForm({
     handleSubmit
 }: {
-    handleSubmit: (data: SignUpInput) => Promise<boolean>
+    handleSubmit: (data: SignUpInput, captchaToken: string | undefined) => Promise<boolean>
 }) {
+    const [captchaToken, setCaptchaToken] = useState<string | undefined>(undefined);
     const initialData = {
         name: "",
         email: "",
@@ -22,6 +25,8 @@ export default function SignUpForm({
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [showMessage, setShowMessage] = useState<boolean>(false);
     const [formData, setFormData] = useState<SignUpFormInput>(initialData);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 
     const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const fieldName = evt.target.name;
@@ -50,7 +55,7 @@ export default function SignUpForm({
                         if (formData.password === formData.confirmPassword) {
                             setShowMessage(false);
                             const { confirmPassword, ...newFormData } = formData;
-                            await handleSubmit(newFormData);
+                            await handleSubmit(newFormData, captchaToken);
                         }
                         else {
                             setShowMessage(true);
@@ -80,25 +85,53 @@ export default function SignUpForm({
                         <FormField
                             id="password"
                             title="Password"
-                            fieldType="password"
                             textHolder="••••••••"
+                            fieldType={showPassword ? "text" : "password"}
                             fieldValue={formData.password}
                             onChangeFunc={handleChange}
-                        />
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword((prevData) => !prevData)}
+                                className="inline px-0.5 cursor-pointer"
+                            >
+                                {showPassword ? <EyeIcon className="size-4" /> : <EyeSlashIcon className="size-4" />}
+                            </button>
+                        </FormField>
                         {/* Confirm Password */}
                         <FormField
                             id="confirmPassword"
                             title="Confirm Password"
-                            fieldType="password"
+                            fieldType={showConfirmPassword ? "text" : "password"}
                             textHolder="••••••••"
                             fieldValue={formData.confirmPassword}
                             onChangeFunc={handleChange}
                             showMessage={showMessage}
                             isSuccess={false}
                             msgError="Password doesn't match!"
+                        >
+                            <button
+                                type="button"
+                                onClick={() => setShowConfirmPassword((prevData) => !prevData)}
+                                className="inline px-0.5 cursor-pointer"
+                            >
+                                {showConfirmPassword ? <EyeIcon className="size-4" /> : <EyeSlashIcon className="size-4" />}
+                            </button>
+                        </FormField>
+                        {/* Captcha */}
+                        <Turnstile
+                            className="flex justify-center mb-3"
+                            sitekey={import.meta.env.VITE_SITE_KEY}
+                            onSuccess={(captchaToken) => {
+                                setCaptchaToken(captchaToken);
+                            }}
                         />
                         {/* Button */}
-                        <Btn btnType="submit" text="Create Account" isLoading={isLoading} btnDisabled={isLoading} />
+                        <Btn
+                            btnType="submit"
+                            text="Create Account"
+                            isLoading={isLoading}
+                        />
                         <div className="flex justify-center items-center mt-2">
                             <FormAction
                                 linkTo="/signin"
