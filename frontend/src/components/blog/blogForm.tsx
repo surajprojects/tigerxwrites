@@ -60,7 +60,7 @@ export default function BlogForm({
                         onChange={handleChange}
                         placeholder="Enter your story title..."
                         required
-                        className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm focus:outline-orange-500 focus:outline-2 focus:outline-offset-2 duration-75 ease-out"
+                        className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm outline-none focus-within:ring-orange-500 focus-within:ring-2 focus-within:ring-offset-2 transition duration-75 ease-out"
                     />
                 </div>
                 {/* Excerpt */}
@@ -73,7 +73,7 @@ export default function BlogForm({
                         value={formData.excerpt}
                         placeholder="Write a brief summary of your story..."
                         required
-                        className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm focus:outline-orange-500 focus:outline-2 focus:outline-offset-2 duration-75 ease-out min-h-20"
+                        className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm outline-none focus-within:ring-orange-500 focus-within:ring-2 focus-within:ring-offset-2 transition duration-75 ease-out min-h-20"
                     ></textarea>
                     <p className="text-sm font-sans text-[#7c706a]">This will appear in blog listing and previews</p>
                 </div>
@@ -87,7 +87,7 @@ export default function BlogForm({
                         value={formData.content}
                         placeholder="Share your story with the world..."
                         required
-                        className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm focus:outline-orange-500 focus:outline-2 focus:outline-offset-2 duration-75 ease-out min-h-72"
+                        className="border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm outline-none focus-within:ring-orange-500 focus-within:ring-2 focus-within:ring-offset-2 transition duration-75 ease-out min-h-72"
                     ></textarea>
                 </div>
                 <Btn btnType="submit" text={btnTitle} isLoading={isLoading} btnDisabled={isLoading} />
