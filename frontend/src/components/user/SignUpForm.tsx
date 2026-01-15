@@ -121,7 +121,8 @@ export default function SignUpForm({
                         {/* Captcha */}
                         <Turnstile
                             className="flex justify-center mb-3"
-                            sitekey={import.meta.env.VITE_SITE_KEY}
+                            // sitekey={import.meta.env.VITE_SITE_KEY}
+                            sitekey="0x4AAAAAACMcX-pMpA2RRH63"
                             onSuccess={(captchaToken) => {
                                 setCaptchaToken(captchaToken);
                             }}
