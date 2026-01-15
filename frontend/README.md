@@ -35,15 +35,16 @@ Each user can manage only their own blogs, while all blogs remain publicly viewa
 
 ## Deployment
 
-This frontend is deployed using [Vercel](https://vercel.com/) by Tiger. You can access the live version here: [Tiger Writes Frontend](https://tigerxwrites.vercel.app/)
+This frontend is deployed using [Vercel](https://vercel.com/) by Tiger. You can access the live version here: [Tiger Writes Frontend](https://tigerxwrites.codax.cloud/)
 
 ## Installation & Setup
 
 1. Clone the repository
 2. Navigate to the folder
 3. Install dependencies
-4. Start the development server
-5. Open the app in your browser at http://localhost:5173
+4. Set up environment variables (VITE_SITE_KEY, VITE_API_URL, etc.)
+5. Start the development server
+6. Open the app in your browser at http://localhost:5173
 
 ## License
 

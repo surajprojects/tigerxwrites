@@ -8,11 +8,13 @@ import { Bindings, Variables } from "./utils/init";
 const app = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 
 // Enable CORS for frontend
-app.use("/api/*", cors({
-    // origin: "https://tigerxwrites.vercel.app",
-    origin: "http://localhost:5173",
-    credentials: true,
-}));
+app.use("/api/*", async (c, next) => {
+    const corsMiddlewareHandler = cors({
+        origin: c.env.CLIENT_URL,
+        credentials: true,
+    });
+    return corsMiddlewareHandler(c, next);
+});
 
 // Mount API routes
 app.route("/api/v1/user", userRouter);

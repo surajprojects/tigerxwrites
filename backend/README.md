@@ -27,15 +27,16 @@ This is the backend for the **Tiger Writes** blogging web app. It is built using
 
 ## Deployment
 
-This backend is deployed using [Cloudflare](https://www.cloudflare.com/) by Tiger. You can access the live version here: [Tiger Writes Backend](https://tigerwrites.suraj23082002.workers.dev/api/v1/blog/bulk)
+This backend is deployed using [Cloudflare](https://www.cloudflare.com/) by Tiger. You can access the live version here: [Tiger Writes Backend](https://api.tigerxwrites.codax.cloud/api/v1/blog/page/1)
 
 ## How to Run Locally
 
 1. Clone the repository  
-2. Install dependencies
-3. Set up environment variables (JWT_SECRET, database URL, etc.)
-4. Run development server
-5. Test APIs locally
+2. Navigate to the folder
+3. Install dependencies
+4. Set up environment variables (JWT_SECRET, Database URL, etc.)
+5. Run development server
+6. Test APIs locally
 
 ## License
 
