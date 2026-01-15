@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { userRouter } from "./routes/user";
 import { blogRouter } from "./routes/blog";
+import { rateLimiter } from "hono-rate-limiter";
 import { Bindings, Variables } from "./utils/init";
 
 // Initialize Hono app with custom bindings/variables
@@ -15,6 +16,15 @@ app.use("/api/*", async (c, next) => {
     });
     return corsMiddlewareHandler(c, next);
 });
+
+// Apply rate limiting middleware
+app.use(
+    rateLimiter({
+        windowMs: 10 * 60 * 1000, // 10 minutes
+        limit: 100, // Limit each client to 100 requests per window
+        keyGenerator: (c) => c.req.header("x-forwarded-for") ?? "", // Use IP address as key
+    })
+);
 
 // Mount API routes
 app.route("/api/v1/user", userRouter);
