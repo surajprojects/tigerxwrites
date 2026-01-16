@@ -19,15 +19,15 @@ app.use("/api/*", async (c, next) => {
 
 // Apply rate limiting middleware
 app.use(
-    rateLimiter({
-        windowMs: 10 * 60 * 1000, // 10 minutes
-        limit: 100, // Limit each client to 100 requests per window
-        keyGenerator: (c) => c.req.header("x-forwarded-for") ?? "", // Use IP address as key
+    rateLimiter<{ Bindings: Bindings }>({
+        binding: (c) => c.env.MY_RATE_LIMITER,
+        keyGenerator: (c) => c.req.header("cf-connecting-ip") ?? "",
     })
 );
 
 // Mount API routes
 app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
+app.get("/health", (c) => c.json({ ok: true }));
 
 export default app;
