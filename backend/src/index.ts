@@ -17,13 +17,15 @@ app.use("/api/*", async (c, next) => {
     return corsMiddlewareHandler(c, next);
 });
 
-// Apply rate limiting middleware
-app.use(
-    rateLimiter<{ Bindings: Bindings }>({
-        binding: (c) => c.env.MY_RATE_LIMITER,
-        keyGenerator: (c) => c.req.header("cf-connecting-ip") ?? "",
-    })
-);
+// Apply rate limiting middleware only in production
+if (process.env.NODE_ENV !== "test") {
+    app.use(
+        rateLimiter<{ Bindings: Bindings }>({
+            binding: (c) => c.env.MY_RATE_LIMITER,
+            keyGenerator: (c) => c.req.header("cf-connecting-ip") ?? "",
+        })
+    );
+}
 
 // Mount API routes
 app.route("/api/v1/user", userRouter);

@@ -20,7 +20,7 @@ export const blogAuth = async (c: MyContext, next: () => Promise<void>) => {
         };
 
         // Verify token and extract user ID
-        const decoded = (await verify(token, c.env.JWT_SECRET)) as { id: string };
+        const decoded = (await verify(token, c.env.JWT_SECRET, "ES256")) as { id: string };
         if (!decoded || !decoded.id) {
             c.status(403);
             return c.json({ message: "Unauthorized!!!" });
