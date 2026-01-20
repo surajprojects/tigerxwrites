@@ -183,7 +183,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../prisma/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_DATABASE_URL\")\n}\n\n// User Model\nmodel User {\n  id       String  @id @default(uuid())\n  email    String  @unique\n  name     String\n  bio      String?\n  password String\n  blogs    Blog[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\n// Blog Model\nmodel Blog {\n  id        String  @id @default(uuid())\n  title     String\n  content   String\n  excerpt   String\n  published Boolean @default(false)\n  author    User    @relation(fields: [authorId], references: [id])\n  authorId  String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
   "inlineSchemaHash": "ec2c8ff2a767d002d00876a986c003e8c182501b2676da6e866b2b3995d79de4",
-  "copyEngine": false
+  "copyEngine": true
 }
 config.dirname = '/'
 

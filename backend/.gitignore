@@ -165,6 +165,5 @@ dist
 .env*
 !.env.example
 .wrangler/
-wrangler.jsonc
 
-/src/generated/prisma
+prisma/generated/prisma
