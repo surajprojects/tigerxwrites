@@ -5,7 +5,7 @@ import { blogRouter } from "./routes/blog";
 import { rateLimiter } from "hono-rate-limiter";
 import { Bindings, Variables } from "./utils/init";
 
-// Initialize Hono app with custom bindings/variables
+// Initialize Hono app with custom bindings/variabless
 const app = new Hono<{ Bindings: Bindings, Variables: Variables }>();
 
 // Enable CORS for frontend
