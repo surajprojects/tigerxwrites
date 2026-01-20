@@ -4,6 +4,7 @@ import FormField from "../form/formField";
 import FormHeader from "../form/formHeader";
 import FormAction from "../form/formAction";
 import { useState, type ChangeEvent } from "react";
+import { VITE_SITE_KEY } from "../../../base.config";
 import type { SignUpInput } from "@tigerxinsights/tigerxwrites";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
@@ -122,7 +123,7 @@ export default function SignUpForm({
                         <Turnstile
                             className="flex justify-center mb-3"
                             // sitekey={import.meta.env.VITE_SITE_KEY}
-                            sitekey="0x4AAAAAACMcX-pMpA2RRH63"
+                            sitekey={VITE_SITE_KEY}
                             onSuccess={(captchaToken) => {
                                 setCaptchaToken(captchaToken);
                             }}
