@@ -10,6 +10,8 @@ export type Bindings = {
     SECRET_KEY: string;
     CLIENT_URL: string;
     MY_RATE_LIMITER: RateLimit;
+    UPSTASH_REDIS_REST_URL: string;
+    UPSTASH_REDIS_REST_TOKEN: string;
 };
 
 /**
