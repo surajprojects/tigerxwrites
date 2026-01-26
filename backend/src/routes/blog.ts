@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 import { handleError } from "../utils/error";
+import { clearCache } from "../utils/clearCache";
 import { initPrisma, initRedis } from "../utils/db";
 import { blogAuth } from "../middlewares/blogAuth";
 import { Bindings, Variables } from "../utils/init";
 import { Blog } from "../../prisma/generated/prisma";
 import { createBlogInput, CreateBlogInput, updateBlogInput, UpdateBlogInput } from "@tigerxinsights/tigerxwrites";
-import { clearCache } from "../utils/clearCache";
 
 // Blog router (handles CRUD for blogs)
 export const blogRouter = new Hono<{ Bindings: Bindings, Variables: Variables }>();
@@ -23,7 +23,7 @@ blogRouter.get("/page/:pageNumber", async (c) => {
         if (cached) {
             return c.json({ message: "Successfully found all blogs!!!", bulkBlogs: cached.bulkBlogs, blogsCount: cached.blogsCount });
         }
-        console.log("All blogs Cache clear!!!")
+
         const prisma = initPrisma(c);
         const bulkBlogs = await prisma.blog.findMany({
             include: {
@@ -67,7 +67,7 @@ blogRouter.get("/:id", async (c) => {
         if (cached) {
             return c.json({ message: "Successfully found the blog!!!", blogData: cached.blogData, });
         }
-        console.log("single blog Cache clear!!!")
+
         const prisma = initPrisma(c);
         const blogData = await prisma.blog.findUnique({
             where: { id },
@@ -112,7 +112,7 @@ blogRouter.post("/", async (c) => {
 
         const redis = initRedis(c);
         await clearCache(redis, "blogsPage*");
-        console.log("Create Cache clear!!!")
+
         const prisma = initPrisma(c);
         const blogData = await prisma.blog.create({
             data: {
@@ -148,7 +148,7 @@ blogRouter.patch("/:id", async (c) => {
         const redis = initRedis(c);
         await redis.del(`blog${id}`);
         await clearCache(redis, "blogsPage*");
-        console.log("Edit Cache clear!!!")
+
         const prisma = initPrisma(c);
         const blogData = await prisma.blog.update({
             where: {
@@ -179,7 +179,7 @@ blogRouter.delete("/:id", async (c) => {
         const redis = initRedis(c);
         await redis.del(`blog${id}`);
         await clearCache(redis, "blogsPage*");
-        console.log("Del Cache clear!!!")
+
         const prisma = initPrisma(c);
         await prisma.blog.delete({
             where: {

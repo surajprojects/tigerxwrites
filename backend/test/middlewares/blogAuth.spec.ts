@@ -52,7 +52,7 @@ describe("blogAuth middleware", () => {
 
         const result = await blogAuth(c, next);
 
-        expect(verify).toHaveBeenCalledWith("token_123", "jwt_secret", "ES256");
+        expect(verify).toHaveBeenCalledWith("token_123", "jwt_secret", "HS256");
         expect(c.status).toHaveBeenCalledWith(403);
         expect(c.json).toHaveBeenCalledWith({ message: "Unauthorized!!!" });
         expect(next).not.toHaveBeenCalled();
@@ -68,7 +68,7 @@ describe("blogAuth middleware", () => {
 
         const result = await blogAuth(c, next);
 
-        expect(verify).toHaveBeenCalledWith("token_123", "jwt_secret", "ES256");
+        expect(verify).toHaveBeenCalledWith("token_123", "jwt_secret", "HS256");
         expect(c.set).toHaveBeenCalledWith("userId", "user_1");
         expect(next).toHaveBeenCalledTimes(1);
 
