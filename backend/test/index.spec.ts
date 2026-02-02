@@ -24,12 +24,12 @@ const IncomingRequest = Request<unknown, IncomingRequestCfProperties>;
 // });
 
 describe("GET /health (unit)", () => {
-	it("returns ok:true", async () => {
-		const request = new IncomingRequest("http://example.com/health");
-		const ctx = createExecutionContext();
-		const res = await worker.fetch(request, env, ctx);
-		await waitOnExecutionContext(ctx);
-		expect(res.status).toBe(200);
-		expect(await res.json()).toEqual({ ok: true });
-	});
+  it("returns ok:true", async () => {
+    const request = new IncomingRequest("http://example.com/health");
+    const ctx = createExecutionContext();
+    const res = await worker.fetch(request, env, ctx);
+    await waitOnExecutionContext(ctx);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+  });
 });

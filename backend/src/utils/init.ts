@@ -5,13 +5,13 @@ import { Context } from "hono";
  * e.g. secrets, database connection strings, etc.
  */
 export type Bindings = {
-    DATABASE_URL: string;
-    JWT_SECRET: string;
-    SECRET_KEY: string;
-    CLIENT_URL: string;
-    MY_RATE_LIMITER: RateLimit;
-    UPSTASH_REDIS_REST_URL: string;
-    UPSTASH_REDIS_REST_TOKEN: string;
+  DATABASE_URL: string;
+  JWT_SECRET: string;
+  SECRET_KEY: string;
+  CLIENT_URL: string;
+  MY_RATE_LIMITER: RateLimit;
+  UPSTASH_REDIS_REST_URL: string;
+  UPSTASH_REDIS_REST_TOKEN: string;
 };
 
 /**
@@ -19,8 +19,8 @@ export type Bindings = {
  * e.g. userId added after authentication
  */
 export type Variables = {
-    userId: string;
-    blogCount: number;
+  userId: string;
+  blogCount: number;
 };
 
 /**
