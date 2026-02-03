@@ -20,6 +20,7 @@ export const verifyCaptcha = async (c: MyContext, next: () => Promise<void>) => 
       throw new Error();
     }
   } catch (error) {
+    console.error(error);
     c.status(500);
     return c.json({ message: "Internal Server Error!!!" });
   }

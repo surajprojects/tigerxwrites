@@ -15,7 +15,7 @@ vi.mock("../../src/utils/clearCache", () => ({
 }));
 
 vi.mock("../../src/middlewares/blogAuth", () => ({
-  blogAuth: async (c: any, next: any) => {
+  blogAuth: async (c: { set: (k: string, v: string) => void }, next: () => Promise<void>) => {
     c.set("userId", "user_1");
     await next();
   },
@@ -39,74 +39,95 @@ app.route("/api/v1/blog", blogRouter);
 
 const env = { JWT_SECRET: "jwt_secret" };
 
+/* ---------------- HELPER TYPES ---------------- */
+
+type RedisMock = {
+  get?: ReturnType<typeof vi.fn>;
+  set?: ReturnType<typeof vi.fn>;
+  del?: ReturnType<typeof vi.fn>;
+};
+
+type PrismaBlogMock = {
+  blog: {
+    findMany?: ReturnType<typeof vi.fn>;
+    count?: ReturnType<typeof vi.fn>;
+    create?: ReturnType<typeof vi.fn>;
+    update?: ReturnType<typeof vi.fn>;
+    delete?: ReturnType<typeof vi.fn>;
+  };
+};
+
 describe("Blog Router", () => {
   beforeEach(() => vi.clearAllMocks());
 
-  /* ---------- GET /page/:pageNumber (cache hit) ---------- */
   it("should return blogs from cache", async () => {
-    (initRedis as any).mockReturnValue({
+    const redisMock: RedisMock = {
       get: vi.fn().mockResolvedValue({
         bulkBlogs: [{ id: "1", title: "cached" }],
         blogsCount: 5,
       }),
-    });
+    };
+
+    vi.mocked(initRedis).mockReturnValue(redisMock as never);
 
     const res = await app.request("/api/v1/blog/page/1", {}, env);
-    const body = (await res.json()) as any;
+    const body = (await res.json()) as { bulkBlogs: { title: string }[] };
 
     expect(body.bulkBlogs[0].title).toBe("cached");
     expect(res.status).toBe(200);
   });
 
-  /* ---------- GET /page/:pageNumber (DB fetch) ---------- */
   it("should fetch blogs from DB and cache them", async () => {
-    const redisMock = { get: vi.fn().mockResolvedValue(null), set: vi.fn() };
-    (initRedis as any).mockReturnValue(redisMock);
+    const redisMock: RedisMock = { get: vi.fn().mockResolvedValue(null), set: vi.fn() };
+    vi.mocked(initRedis).mockReturnValue(redisMock as never);
 
-    const prismaMock = {
+    const prismaMock: PrismaBlogMock = {
       blog: {
         findMany: vi.fn().mockResolvedValue([{ id: "1", title: "dbBlog" }]),
         count: vi.fn().mockResolvedValue(10),
       },
     };
-    (initPrisma as any).mockReturnValue(prismaMock);
+
+    vi.mocked(initPrisma).mockReturnValue(prismaMock as never);
 
     const res = await app.request("/api/v1/blog/page/1", {}, env);
-    const body = (await res.json()) as any;
+    const body = (await res.json()) as { blogsCount: number };
 
     expect(prismaMock.blog.findMany).toHaveBeenCalled();
     expect(redisMock.set).toHaveBeenCalled();
     expect(body.blogsCount).toBe(10);
   });
 
-  /* ---------- GET /:id (cache hit) ---------- */
   it("should return single blog from cache", async () => {
-    (initRedis as any).mockReturnValue({
-      get: vi.fn().mockResolvedValue({
-        blogData: { id: "1", title: "cachedBlog" },
-      }),
-    });
+    const redisMock: RedisMock = {
+      get: vi.fn().mockResolvedValue({ blogData: { id: "1", title: "cachedBlog" } }),
+    };
+
+    vi.mocked(initRedis).mockReturnValue(redisMock as never);
 
     const res = await app.request("/api/v1/blog/1", {}, env);
-    const body = (await res.json()) as any;
+    const body = (await res.json()) as { blogData: { title: string } };
 
     expect(body.blogData.title).toBe("cachedBlog");
   });
 
-  /* ---------- POST / (create blog) ---------- */
   it("should create a blog", async () => {
-    (createBlogInput.safeParse as any).mockReturnValue({ success: true, data: {} });
+    vi.mocked(createBlogInput.safeParse).mockReturnValue({
+      success: true,
+      data: { title: "T", excerpt: "E", content: "C" },
+    } as never);
 
-    const redisMock = { set: vi.fn() };
-    (initRedis as any).mockReturnValue(redisMock);
+    const redisMock: RedisMock = { set: vi.fn() };
+    vi.mocked(initRedis).mockReturnValue(redisMock as never);
 
-    const prismaMock = {
+    const prismaMock: PrismaBlogMock = {
       blog: {
         create: vi.fn().mockResolvedValue({ id: "blog_1" }),
         count: vi.fn().mockResolvedValue(1),
       },
     };
-    (initPrisma as any).mockReturnValue(prismaMock);
+
+    vi.mocked(initPrisma).mockReturnValue(prismaMock as never);
 
     const res = await app.request(
       "/api/v1/blog",
@@ -118,26 +139,23 @@ describe("Blog Router", () => {
       env,
     );
 
-    const body = (await res.json()) as any;
+    const body = (await res.json()) as { message: string };
 
     expect(clearCache).toHaveBeenCalled();
     expect(prismaMock.blog.create).toHaveBeenCalled();
     expect(body.message).toBe("Successfully created the blog!!!");
   });
 
-  /* ---------- PATCH /:id ---------- */
   it("should update blog", async () => {
-    (updateBlogInput.safeParse as any).mockReturnValue({ success: true, data: { title: "New" } });
+    vi.mocked(updateBlogInput.safeParse).mockReturnValue({ success: true, data: { title: "New" } });
 
-    const redisMock = { del: vi.fn(), set: vi.fn() };
-    (initRedis as any).mockReturnValue(redisMock);
+    const redisMock: RedisMock = { del: vi.fn(), set: vi.fn() };
+    vi.mocked(initRedis).mockReturnValue(redisMock as never);
 
-    const prismaMock = {
-      blog: { update: vi.fn().mockResolvedValue({ id: "1" }) },
-    };
-    (initPrisma as any).mockReturnValue(prismaMock);
+    const prismaMock: PrismaBlogMock = { blog: { update: vi.fn().mockResolvedValue({ id: "1" }) } };
+    vi.mocked(initPrisma).mockReturnValue(prismaMock as never);
 
-    const res = await app.request(
+    await app.request(
       "/api/v1/blog/1",
       {
         method: "PATCH",
@@ -150,21 +168,18 @@ describe("Blog Router", () => {
     expect(prismaMock.blog.update).toHaveBeenCalled();
   });
 
-  /* ---------- DELETE /:id ---------- */
   it("should delete blog", async () => {
-    const redisMock = { del: vi.fn() };
-    (initRedis as any).mockReturnValue(redisMock);
+    const redisMock: RedisMock = { del: vi.fn() };
+    vi.mocked(initRedis).mockReturnValue(redisMock as never);
 
-    const prismaMock = {
-      blog: {
-        delete: vi.fn(),
-        count: vi.fn().mockResolvedValue(0),
-      },
+    const prismaMock: PrismaBlogMock = {
+      blog: { delete: vi.fn(), count: vi.fn().mockResolvedValue(0) },
     };
-    (initPrisma as any).mockReturnValue(prismaMock);
+
+    vi.mocked(initPrisma).mockReturnValue(prismaMock as never);
 
     const res = await app.request("/api/v1/blog/1", { method: "DELETE" }, env);
-    const body = (await res.json()) as any;
+    const body = (await res.json()) as { message: string };
 
     expect(prismaMock.blog.delete).toHaveBeenCalled();
     expect(body.message).toBe("Successfully deleted the blog!!!");

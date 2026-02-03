@@ -49,7 +49,7 @@ userRouter.post("/signup", verifyCaptcha, async (c) => {
     const prisma = initPrisma(c);
     // Validate request body
     const body = await c.req.json<{ captchaToken?: string } & SignUpInput>();
-    const { captchaToken, ...signInInputData } = body;
+    const { captchaToken: _captchaToken, ...signInInputData } = body;
     const parsedInput = signUpInput.safeParse(signInInputData);
     if (!parsedInput.success) {
       c.status(400);

@@ -5,7 +5,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default defineConfig([
-  globalIgnores(["dist", "node_modules"]),
+  globalIgnores(["dist", "node_modules", "prisma", ".wrangler", ".vscode"]),
   {
     files: ["**/*.{ts,js}"],
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -19,7 +19,10 @@ export default defineConfig([
     },
     rules: {
       "no-console": "off",
-      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
     },
   },
   eslintConfigPrettier,

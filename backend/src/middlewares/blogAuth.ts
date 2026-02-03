@@ -30,6 +30,7 @@ export const blogAuth = async (c: MyContext, next: () => Promise<void>) => {
     c.set("userId", decoded.id);
     await next();
   } catch (error) {
+    console.error(error);
     c.status(500);
     return c.json({ message: "Internal Server Error!!!" });
   }

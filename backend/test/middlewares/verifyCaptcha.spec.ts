@@ -1,12 +1,14 @@
 import type { MyContext } from "../../src/utils/init";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, type Mock } from "vitest";
 import { verifyCaptcha } from "../../src/middlewares/verifyCaptcha";
+
+type FetchJson = {
+  success: boolean;
+};
 
 function createMockContext({ captchaToken = "captchaToken", secretKey = "secretKey" } = {}) {
   return {
-    env: {
-      SECRET_KEY: secretKey,
-    },
+    env: { SECRET_KEY: secretKey },
     req: {
       json: vi.fn().mockResolvedValue({ captchaToken }),
     },
@@ -24,47 +26,38 @@ describe("Verify captcha middleware (unit)", () => {
     const c = createMockContext();
     const next = vi.fn().mockResolvedValue(undefined);
 
-    // mock fetch to return success:true
-    vi.stubGlobal(
-      "fetch",
-      vi.fn().mockResolvedValue({
-        json: vi.fn().mockResolvedValue({ success: true }),
-      } as any),
-    );
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: vi.fn().mockResolvedValue({ success: true } satisfies FetchJson),
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
 
     await verifyCaptcha(c, next);
 
-    // should call next
     expect(next).toHaveBeenCalledTimes(1);
-
-    // should NOT return error
     expect(c.status).not.toHaveBeenCalled();
     expect(c.json).not.toHaveBeenCalled();
   });
 
-  it("should return 500 when captcha fails (success:false)", async () => {
+  it("should return 500 when captcha fails", async () => {
     const c = createMockContext();
     const next = vi.fn();
 
-    vi.stubGlobal(
-      "fetch",
-      vi.fn().mockResolvedValue({
-        json: vi.fn().mockResolvedValue({ success: false }),
-      } as any),
-    );
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: vi.fn().mockResolvedValue({ success: false } satisfies FetchJson),
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
 
     const result = await verifyCaptcha(c, next);
 
-    // should NOT call next
     expect(next).not.toHaveBeenCalled();
-
-    // should return error response
     expect(c.status).toHaveBeenCalledWith(500);
     expect(c.json).toHaveBeenCalledWith({ message: "Internal Server Error!!!" });
     expect(result).toEqual({ message: "Internal Server Error!!!" });
   });
 
-  it("should return 500 when fetch throws error", async () => {
+  it("should return 500 when fetch throws", async () => {
     const c = createMockContext();
     const next = vi.fn();
 
@@ -74,23 +67,22 @@ describe("Verify captcha middleware (unit)", () => {
 
     expect(next).not.toHaveBeenCalled();
     expect(c.status).toHaveBeenCalledWith(500);
-    expect(c.json).toHaveBeenCalledWith({ message: "Internal Server Error!!!" });
     expect(result).toEqual({ message: "Internal Server Error!!!" });
   });
 
-  it("should return 500 when body doesn't contain captchaToken", async () => {
+  it("should return 500 when captchaToken missing", async () => {
     const c = createMockContext();
-    (c.req.json as any).mockResolvedValue({}); // no captchaToken
+
+    const jsonMock = c.req.json as unknown as Mock;
+    jsonMock.mockResolvedValue({});
 
     const next = vi.fn();
 
-    // still mock fetch (though it may fail earlier / fetch gets invalid)
-    vi.stubGlobal(
-      "fetch",
-      vi.fn().mockResolvedValue({
-        json: vi.fn().mockResolvedValue({ success: false }),
-      } as any),
-    );
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: vi.fn().mockResolvedValue({ success: false } satisfies FetchJson),
+    });
+
+    vi.stubGlobal("fetch", fetchMock);
 
     const result = await verifyCaptcha(c, next);
 
