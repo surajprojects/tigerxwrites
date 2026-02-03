@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && prettier . --write && eslint . && vite build",
-    "buildless": "tsc -b && vite build",
-    "start": "cd dist && serve",
     "lint": "eslint .",
+    "format": "prettier . --write",
+    "check": "pnpm run lint && pnpm run format",
+    "build": "pnpm run check && tsc -b && vite build",
+    "dev": "vite",
+    "start": "cd dist && serve",
     "preview": "vite preview"
   },
   "dependencies": {

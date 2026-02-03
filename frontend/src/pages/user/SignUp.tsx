@@ -12,10 +12,10 @@ export default function SignUp() {
       await axiosInstance.post("user/signup", { ...formData, captchaToken });
       navigate("/blogs");
       toast.success("Sign Up successfull!!!");
+      return true;
     } catch (error) {
       errorHandle(error);
-    } finally {
-      return true;
+      return false;
     }
   };
   return (

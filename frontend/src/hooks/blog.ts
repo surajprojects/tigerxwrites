@@ -38,6 +38,6 @@ export function useBlog(blogId: string) {
       setIsLoading(false);
     };
     getData();
-  }, []);
+  }, [blogId]);
   return { blogData, isLoading };
 }

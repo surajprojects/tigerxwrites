@@ -42,7 +42,9 @@ export default function BlogForm({
           if (isEdit && handleEditSubmit) {
             await handleEditSubmit(formData);
           } else {
-            handleSubmit && (await handleSubmit(formData as CreateBlogInput));
+            if (handleSubmit) {
+              await handleSubmit(formData as CreateBlogInput);
+            }
           }
           setIsLoading(false);
         }}

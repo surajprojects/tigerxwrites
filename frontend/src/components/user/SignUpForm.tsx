@@ -58,7 +58,7 @@ export default function SignUpForm({
               evt.preventDefault();
               if (formData.password === formData.confirmPassword) {
                 setShowMessage(false);
-                const { confirmPassword, ...newFormData } = formData;
+                const { confirmPassword: _confirmPassword, ...newFormData } = formData;
                 await handleSubmit(newFormData, captchaToken);
               } else {
                 setShowMessage(true);

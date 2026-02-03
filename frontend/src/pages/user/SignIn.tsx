@@ -12,10 +12,10 @@ export default function SignIn() {
       await axiosInstance.post("/user/signin", formData);
       navigate("/blogs");
       toast.success("Sign In successfull!!!");
+      return true;
     } catch (error) {
       errorHandle(error);
-    } finally {
-      return true;
+      return false;
     }
   };
   return (

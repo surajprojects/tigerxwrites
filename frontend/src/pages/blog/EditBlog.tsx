@@ -19,10 +19,10 @@ export default function EditBlog() {
       const blogData: Blog = result.data.blogData;
       navigate(`/blogs/${blogData.id}`);
       toast.success("Blog updated successfully!!!");
+      return true;
     } catch (error) {
       errorHandle(error);
-    } finally {
-      return true;
+      return false;
     }
   };
   return (

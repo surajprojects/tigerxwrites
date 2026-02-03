@@ -15,10 +15,10 @@ export default function NewBlog() {
       const blogData: Blog = result.data.blogData;
       navigate(`/blogs/${blogData.id}`);
       toast.success("Blog created successfully!!!");
+      return true;
     } catch (error) {
       errorHandle(error);
-    } finally {
-      return true;
+      return false;
     }
   };
   return (

@@ -7,7 +7,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default defineConfig([
-  globalIgnores(["dist"]),
+  globalIgnores(["dist", "node_modules", "public"]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
@@ -21,6 +21,12 @@ export default defineConfig([
       ecmaVersion: "latest",
       sourceType: "module",
       globals: globals.browser,
+    },
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
     },
   },
   eslintConfigPrettier,
