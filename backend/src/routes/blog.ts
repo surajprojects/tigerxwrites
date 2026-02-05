@@ -134,6 +134,7 @@ blogRouter.post("/", async (c) => {
 
     c.set("blogCount", await prisma.blog.count());
     await redis.set(`blog${blogData.id}`, JSON.stringify({ blogData }), { ex: 900 }); // 15 mintues
+    await redis.publish("newBlog", JSON.stringify({ blogData }));
     return c.json({ message: "Successfully created the blog!!!", blogData });
   } catch (error) {
     return c.json(handleError(error, c));

@@ -16,3 +16,5 @@ export async function clearCache(redis: Redis, matchKey: string) {
     }
   } while (cursor !== 0);
 }
+
+export { Redis } from "@upstash/redis";
