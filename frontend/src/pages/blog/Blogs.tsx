@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { useUser } from "../../hooks/user";
 import { useBlogs } from "../../hooks/blogs";
 import BlogCard from "../../components/blog/blogCard";
-import BlogSkeletonCard from "../../components/blog/blogSkeletonCard";
 import getPageWindow from "../../utils/pagination/pageWindow";
-import { useState } from "react";
+import BlogSkeletonCard from "../../components/blog/blogSkeletonCard";
 
 export default function Blogs() {
   const { userId } = useUser();

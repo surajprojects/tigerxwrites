@@ -28,8 +28,8 @@ export function useBlog(blogId: string) {
             excerpt: blogData.excerpt,
             content: blogData.content,
             postedOn: blogData.createdAt.split("T")[0],
-            authorName: blogData.author.name,
-            authorBio: blogData.author.bio ? blogData.author.bio : "",
+            // authorName: blogData.author.name ? blogData.author.name : "",
+            // authorBio: blogData.author.bio ? blogData.author.bio : "",
           };
         });
       } catch (error) {
