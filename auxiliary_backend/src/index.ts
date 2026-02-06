@@ -1,6 +1,15 @@
+process.on("uncaughtException", (err) => {
+  console.log("UNCAUGHT EXCEPTION:", err.stack);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.log("UNHANDLED REJECTION:", reason);
+});
+
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import newBlogSub from "./utils/sub.js";
 import streamRouter from "./routes/streamRouter.js";
 
 const app = express();
@@ -14,6 +23,8 @@ app.use(
 );
 
 app.use(express.json());
+
+newBlogSub();
 
 app.use("/api/v1", streamRouter);
 

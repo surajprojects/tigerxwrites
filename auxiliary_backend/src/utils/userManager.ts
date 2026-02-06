@@ -4,6 +4,7 @@ export interface UserManager {
   addUser(user: Response): void;
   removeUser(user: Response): void;
   broadcast(message: string): void;
+  heartBeat(): void;
 }
 
 export abstract class BaseUserManager implements UserManager {
@@ -12,6 +13,7 @@ export abstract class BaseUserManager implements UserManager {
   abstract addUser(user: Response): void;
   abstract removeUser(user: Response): void;
   abstract broadcast(message: string): void;
+  abstract heartBeat(): void;
 }
 
 export class InMemoryUserManager extends BaseUserManager {
@@ -38,9 +40,16 @@ export class InMemoryUserManager extends BaseUserManager {
   }
 
   broadcast(message: string) {
-    console.log("Broadcasting to memory users:", message, this.users.length);
-    for (const user of this.users) {
+    const { users } = this;
+    for (const user of users) {
       user.write(`data:${message}\n\n`);
+    }
+  }
+
+  heartBeat(): void {
+    const { users } = this;
+    for (const user of users) {
+      user.write(`:\n\n`);
     }
   }
 }

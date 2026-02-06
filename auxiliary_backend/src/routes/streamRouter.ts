@@ -1,15 +1,7 @@
-import { redis } from "../utils/db.js";
 import express, { Router } from "express";
 import { inMemoryUserManager } from "../utils/userManager.js";
-import { Blog } from "../../../backend/prisma/generated/prisma/index.js";
 
 const streamRouter: Router = express.Router();
-
-const newBlogSub = redis.subscribe("newBlog");
-
-type NewBlogMessage = {
-  blogData: Blog;
-};
 
 streamRouter.post("/stream", async (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
@@ -22,13 +14,13 @@ streamRouter.post("/stream", async (req, res) => {
 
   inMemoryUserManager.addUser(res);
 
-  newBlogSub.on("message", (data) => {
-    const msg = data.message as NewBlogMessage;
-    inMemoryUserManager.broadcast(msg.blogData.title);
-  });
+  const intervalId = setInterval(() => {
+    inMemoryUserManager.heartBeat();
+  }, 15000);
 
   res.on("close", () => {
     inMemoryUserManager.removeUser(res);
+    clearInterval(intervalId);
   });
 });
 
