@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { PencilIcon } from "@heroicons/react/24/outline";
+import NewBlogStreamBtn from "../button/newBlogStreamBtn";
 
 export default function Header() {
   return (
@@ -31,6 +32,7 @@ export default function Header() {
                 About
               </NavLink>
             </li>
+            <NewBlogStreamBtn />
           </ul>
           <ul className="flex text-sm">
             <li className=" text-gray-800 hover:text-white hover:bg-orange-400 px-3 py-2 rounded-md mx-1 duration-300 ease-out hover:cursor-pointer">

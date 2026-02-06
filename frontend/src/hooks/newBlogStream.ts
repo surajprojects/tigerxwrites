@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import type { Blogs } from "../utils/types/blog";
 import { VITE_SSE_API_URL } from "../../base.config";
-import { errorHandle } from "../utils/errors/errorHandle";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 
 export function useNewBlogStream() {
-  const [blogsData, setBlogsData] = useState<string[]>([]);
+  const [blogsData, setBlogsData] = useState<Blogs>([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -14,7 +14,12 @@ export function useNewBlogStream() {
       signal: controller.signal,
 
       onmessage(event) {
-        setBlogsData((prevData) => [...prevData, event.data]);
+        try {
+          const blog = JSON.parse(event.data);
+          setBlogsData((prevData) => [...prevData, blog]);
+        } catch (error) {
+          console.warn("Invalid SSE data!!!", error);
+        }
       },
 
       onclose() {
@@ -23,7 +28,6 @@ export function useNewBlogStream() {
 
       onerror(err) {
         console.error("Stream error", err);
-        errorHandle(err);
       },
     });
 
