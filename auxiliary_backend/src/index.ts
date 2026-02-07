@@ -1,15 +1,7 @@
-process.on("uncaughtException", (err) => {
-  console.log("UNCAUGHT EXCEPTION:", err.stack);
-});
-
-process.on("unhandledRejection", (reason) => {
-  console.log("UNHANDLED REJECTION:", reason);
-});
-
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
-import newBlogSub from "./utils/sub.js";
+import newBlogSub from "./utils/newBlogSub.js";
 import streamRouter from "./routes/streamRouter.js";
 
 const app = express();
@@ -24,8 +16,6 @@ app.use(
 
 app.use(express.json());
 
-newBlogSub();
-
 app.use("/api/v1", streamRouter);
 
 app.get("/health", async (_req, res) => {
@@ -36,6 +26,12 @@ app.use(async (_req, res) => {
   res.status(400).json({ message: "Bad Request" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Serving on port ${PORT}`);
-});
+async function main() {
+  await newBlogSub();
+
+  app.listen(PORT, async () => {
+    console.log(`Serving on port ${PORT}`);
+  });
+}
+
+main();
