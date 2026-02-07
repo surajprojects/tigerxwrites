@@ -1,6 +1,16 @@
 import { redisClient } from "./redis.js";
-import { Blog } from "../../../backend/prisma/generated/prisma/index.js";
 import { inMemoryUserManager } from "./userManager.js";
+
+interface Blog {
+  id: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  published: boolean;
+  authorId: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 type NewBlogMessage = {
   blogData: Blog;
