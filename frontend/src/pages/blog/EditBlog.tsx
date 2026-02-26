@@ -41,9 +41,9 @@ export default function EditBlog() {
               title="Edit Your Story"
               handleSubmit={handleSubmit}
               initialData={{
-                title: blogData.title,
-                excerpt: blogData.excerpt,
-                content: blogData.content,
+                title: blogData.title ? blogData.title : "",
+                excerpt: blogData.excerpt ? blogData.excerpt : "",
+                content: blogData.content ? blogData.content : "",
               }}
             />
           )}

@@ -39,8 +39,10 @@ export default function Blogs() {
                       title={blog.title}
                       excerpt={blog.excerpt}
                       content={blog.content}
-                      authorName={blog.author.name}
-                      postedOn={blog.createdAt.split("T")[0]}
+                      author={{
+                        name: blog.author.name,
+                      }}
+                      createdAt={blog.createdAt.split("T")[0]}
                       showBtns={userData?.userData.id === blog.author.id ? true : false}
                     />
                   );
