@@ -135,6 +135,20 @@ blogRouter.post("/", async (c) => {
         content: body.content,
         authorId: userData.id,
       },
+      select: {
+        id: true,
+        title: true,
+        excerpt: true,
+        content: true,
+        authorId: true,
+        createdAt: true,
+        author: {
+          select: {
+            name: true,
+            bio: true,
+          },
+        },
+      },
     });
 
     c.set("blogCount", await prisma.blog.count());
@@ -173,6 +187,20 @@ blogRouter.patch("/:id", async (c) => {
         ...(parsedInput.data.title && { title: parsedInput.data.title }),
         ...(parsedInput.data.excerpt && { excerpt: parsedInput.data.excerpt }),
         ...(parsedInput.data.content && { content: parsedInput.data.content }),
+      },
+      select: {
+        id: true,
+        title: true,
+        excerpt: true,
+        content: true,
+        authorId: true,
+        createdAt: true,
+        author: {
+          select: {
+            name: true,
+            bio: true,
+          },
+        },
       },
     });
 

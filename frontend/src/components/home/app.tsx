@@ -7,10 +7,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter(rootRoute);
 
 export default function App() {
-  const { blogsData } = useNewBlogStream();
+  const { blogsData, isLoading } = useNewBlogStream();
   return (
     <>
-      <BlogStreamContext.Provider value={blogsData}>
+      <BlogStreamContext.Provider value={{ blogs: blogsData, isLoading }}>
         <RouterProvider router={router} />
       </BlogStreamContext.Provider>
     </>

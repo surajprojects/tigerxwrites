@@ -1,3 +1,4 @@
+import Spinner from "../ui/spinner";
 import { useContext, useState } from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
 import { BlogStreamContext } from "../../store/streamContext";
@@ -24,8 +25,12 @@ export default function NewBlogStreamBtn() {
       </button>
       {showUpdates && (
         <NotificationCard>
-          {blogs.length > 0 ? (
-            blogs.map((newBlog) => {
+          {blogs.isLoading ? (
+            <div className="flex justify-center items-center h-full">
+              <Spinner customize={true} />
+            </div>
+          ) : blogs.blogs.length > 0 ? (
+            blogs.blogs.map((newBlog) => {
               return (
                 <NotificationData
                   key={newBlog.id}
