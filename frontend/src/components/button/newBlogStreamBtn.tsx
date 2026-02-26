@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { BellIcon } from "@heroicons/react/24/outline";
-import { BlogStreamContext } from "../../utils/store/streamContext";
+import { BlogStreamContext } from "../../store/streamContext";
 import NotificationCard from "../notification/notificationCard";
 import NotificationData from "../notification/notificationData";
 

@@ -1,10 +1,13 @@
-import { useState } from "react";
 import MobileHeader from "./mobileHeader";
+import { useContext, useState } from "react";
+import SignOutBtn from "../button/signOutBtn";
 import { Link, NavLink } from "react-router-dom";
+import { UserDataContext } from "../../store/userContext";
 import NewBlogStreamBtn from "../button/newBlogStreamBtn";
 import { Bars3Icon, PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Header() {
+  const userData = useContext(UserDataContext);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   return (
     <>
@@ -49,7 +52,11 @@ export default function Header() {
           </ul>
           <ul className="hidden md:flex text-sm">
             <li className=" text-gray-800 hover:text-white hover:bg-orange-400 px-3 py-2 rounded-md mx-1 duration-300 ease-out hover:cursor-pointer">
-              <Link to={"/signin"}>Sign In</Link>
+              {userData && userData.userData.id.length > 1 ? (
+                <SignOutBtn />
+              ) : (
+                <Link to={"/signin"}>Sign In</Link>
+              )}
             </li>
             <li className="text-white bg-orange-500 px-3 py-2 rounded-md mx-2 duration-300 ease-out hover:cursor-pointer hover:bg-orange-400">
               <Link to={"/blogs/new"} className="flex justify-center items-center">

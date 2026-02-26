@@ -1,6 +1,7 @@
 import { verify } from "hono/jwt";
 import { getCookie } from "hono/cookie";
 import { MyContext } from "../utils/init";
+import { initPrisma } from "../utils/db";
 
 /**
  * Blog authentication middleware
@@ -26,8 +27,25 @@ export const blogAuth = async (c: MyContext, next: () => Promise<void>) => {
       return c.json({ message: "Unauthorized!!!" });
     }
 
-    // Store userId in context for downstream handlers
-    c.set("userId", decoded.id);
+    const prisma = initPrisma(c);
+    const userData = await prisma.user.findUnique({
+      where: {
+        id: decoded.id,
+      },
+      select: {
+        id: true,
+        email: true,
+        bio: true,
+        name: true,
+      },
+    });
+
+    if (!userData) {
+      c.status(404);
+      return c.json({ message: "User not found!!!" });
+    }
+
+    c.set("userData", userData);
     await next();
   } catch (error) {
     console.error(error);

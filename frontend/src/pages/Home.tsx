@@ -1,10 +1,12 @@
-import { useEffect, useRef } from "react";
 import { useBlogs } from "../hooks/blogs";
 import BlogCard from "../components/blog/blogCard";
+import { useContext, useEffect, useRef } from "react";
+import { UserDataContext } from "../store/userContext";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import BlogSkeletonCard from "../components/blog/blogSkeletonCard";
 
 export default function Home() {
+  const userData = useContext(UserDataContext);
   const { blogsData, isLoading } = useBlogs();
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const scrollToAbout = () => {
@@ -86,6 +88,7 @@ export default function Home() {
                         content={blog.content}
                         authorName={blog.author.name}
                         postedOn={blog.createdAt.split("T")[0]}
+                        showBtns={userData?.userData.id === blog.author.id ? true : false}
                       />
                     );
                   }

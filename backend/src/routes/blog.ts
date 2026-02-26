@@ -110,7 +110,7 @@ blogRouter.use("/*", blogAuth);
 // POST / - create a new blog (requires user auth)
 blogRouter.post("/", async (c) => {
   try {
-    const userId = c.get("userId");
+    const userData = c.get("userData");
     const body: CreateBlogInput = await c.req.json();
     const parsedInput = createBlogInput.safeParse(body);
 
@@ -128,7 +128,7 @@ blogRouter.post("/", async (c) => {
         title: body.title,
         excerpt: body.excerpt,
         content: body.content,
-        authorId: userId,
+        authorId: userData.id,
       },
     });
 
@@ -145,7 +145,7 @@ blogRouter.post("/", async (c) => {
 blogRouter.patch("/:id", async (c) => {
   try {
     const id = c.req.param("id");
-    const userId = c.get("userId");
+    const userData = c.get("userData");
     const body: UpdateBlogInput = await c.req.json();
     const parsedInput = updateBlogInput.safeParse(body);
 
@@ -162,7 +162,7 @@ blogRouter.patch("/:id", async (c) => {
     const blogData = await prisma.blog.update({
       where: {
         id,
-        authorId: userId,
+        authorId: userData.id,
       },
       data: {
         ...(parsedInput.data.title && { title: parsedInput.data.title }),
@@ -182,7 +182,7 @@ blogRouter.patch("/:id", async (c) => {
 blogRouter.delete("/:id", async (c) => {
   try {
     const id = c.req.param("id");
-    const userId = c.get("userId");
+    const userData = c.get("userData");
 
     const redis = initRedis(c);
     await redis.del(`blog${id}`);
@@ -192,7 +192,7 @@ blogRouter.delete("/:id", async (c) => {
     await prisma.blog.delete({
       where: {
         id,
-        authorId: userId,
+        authorId: userData.id,
       },
     });
     c.set("blogCount", await prisma.blog.count());

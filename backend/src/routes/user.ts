@@ -8,6 +8,7 @@ import { Bindings, Variables } from "../utils/init";
 import { setCookie, deleteCookie } from "hono/cookie";
 import { verifyCaptcha } from "../middlewares/verifyCaptcha";
 import { SignInInput, signInInput, SignUpInput, signUpInput } from "@tigerxinsights/tigerxwrites";
+import { email } from "zod";
 
 // User router (handles authentication & session management)
 export const userRouter = new Hono<{ Bindings: Bindings; Variables: Variables }>();
@@ -19,8 +20,8 @@ export const userRouter = new Hono<{ Bindings: Bindings; Variables: Variables }>
  */
 userRouter.get("/me", blogAuth, async (c) => {
   try {
-    const userId = c.get("userId");
-    return c.json({ message: "User authentication successful!!!", userId });
+    const userData = c.get("userData");
+    return c.json({ message: "User authentication successfull!!!", userData });
   } catch (error) {
     return c.json(handleError(error, c));
   }
@@ -31,7 +32,7 @@ userRouter.get("/signout", async (c) => {
     deleteCookie(c, "token", {
       path: "/api/v1",
     });
-    return c.json({ message: "Signout successful!!!" });
+    return c.json({ message: "Signout successfull!!!" });
   } catch (error) {
     return c.json(handleError(error, c));
   }
@@ -79,7 +80,15 @@ userRouter.post("/signup", verifyCaptcha, async (c) => {
     });
 
     c.status(201);
-    return c.json({ message: "Successfully created the user!!!" });
+    return c.json({
+      message: "Successfully created the user!!!",
+      userData: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+      },
+    });
   } catch (error) {
     return c.json(handleError(error, c));
   }
@@ -131,7 +140,15 @@ userRouter.post("/signin", async (c) => {
       maxAge: 60 * 60,
       path: "/api/v1",
     });
-    return c.json({ message: "Sign In successful!!!" });
+    return c.json({
+      message: "Sign In successfull!!!",
+      userData: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+      },
+    });
   } catch (error) {
     return c.json(handleError(error, c));
   }

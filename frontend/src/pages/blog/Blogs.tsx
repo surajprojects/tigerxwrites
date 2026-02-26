@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { useUser } from "../../hooks/user";
+import { useContext, useState } from "react";
 import { useBlogs } from "../../hooks/blogs";
 import BlogCard from "../../components/blog/blogCard";
+import { UserDataContext } from "../../store/userContext";
 import getPageWindow from "../../utils/pagination/pageWindow";
 import BlogSkeletonCard from "../../components/blog/blogSkeletonCard";
 
 export default function Blogs() {
-  const { userId } = useUser();
+  const userData = useContext(UserDataContext);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const { blogsData, isLoading, totalPages } = useBlogs(currentPage);
   return (
@@ -41,7 +41,7 @@ export default function Blogs() {
                       content={blog.content}
                       authorName={blog.author.name}
                       postedOn={blog.createdAt.split("T")[0]}
-                      showBtns={userId === blog.author.id ? true : false}
+                      showBtns={userData?.userData.id === blog.author.id ? true : false}
                     />
                   );
                 })

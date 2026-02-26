@@ -19,8 +19,13 @@ export type Bindings = {
  * e.g. userId added after authentication
  */
 export type Variables = {
-  userId: string;
   blogCount: number;
+  userData: {
+    id: string;
+    name: string;
+    email: string;
+    bio: string | null;
+  };
 };
 
 /**
