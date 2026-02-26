@@ -81,10 +81,15 @@ blogRouter.get("/:id", async (c) => {
     const prisma = initPrisma(c);
     const blogData = await prisma.blog.findUnique({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        excerpt: true,
+        content: true,
+        authorId: true,
+        createdAt: true,
         author: {
           select: {
-            id: true,
             name: true,
             bio: true,
           },

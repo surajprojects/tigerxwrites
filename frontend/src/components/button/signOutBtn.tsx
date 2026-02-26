@@ -22,7 +22,9 @@ export default function SignOutBtn() {
   };
   return (
     <>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <button onClick={handleSignOut} className="cursor-pointer">
+        Sign Out
+      </button>
     </>
   );
 }

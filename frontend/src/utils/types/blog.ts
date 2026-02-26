@@ -13,9 +13,3 @@ export interface Blog {
 }
 
 export type Blogs = Blog[];
-
-export type BlogData = Pick<Blog, "id" | "title" | "content" | "excerpt"> & {
-  postedOn: string;
-  authorName: string;
-  authorBio?: string;
-};

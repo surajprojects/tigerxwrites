@@ -20,9 +20,11 @@ export default function Blog() {
             title={blogData.title}
             excerpt={blogData.excerpt}
             content={blogData.content}
-            postedOn={blogData.postedOn}
-            authorBio={blogData.authorBio}
-            authorName={blogData.authorName}
+            createdAt={blogData.createdAt}
+            author={{
+              name: blogData.author?.name,
+              bio: blogData.author?.bio,
+            }}
           />
         )}
       </section>

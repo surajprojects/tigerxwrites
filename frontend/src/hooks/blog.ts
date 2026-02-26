@@ -1,18 +1,22 @@
 import axiosInstance from "../utils/axios";
 import { useEffect, useState } from "react";
+import type { Blog } from "../utils/types/blog";
+import type { DeepPartial } from "../utils/utils";
 import { errorHandle } from "../utils/errors/errorHandle";
-import type { Blog, BlogData } from "../utils/types/blog";
 
 export function useBlog(blogId: string) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [blogData, setBlogData] = useState<BlogData>({
+  const [blogData, setBlogData] = useState<DeepPartial<Blog>>({
     id: "",
     title: "",
     excerpt: "",
     content: "",
-    postedOn: "",
-    authorName: "",
-    authorBio: "",
+    createdAt: "",
+    authorId: "",
+    author: {
+      name: "",
+      bio: "",
+    },
   });
   useEffect(() => {
     const getData = async () => {
@@ -27,9 +31,12 @@ export function useBlog(blogId: string) {
             title: blogData.title,
             excerpt: blogData.excerpt,
             content: blogData.content,
-            postedOn: blogData.createdAt.split("T")[0],
-            // authorName: blogData.author.name ? blogData.author.name : "",
-            // authorBio: blogData.author.bio ? blogData.author.bio : "",
+            createdAt: blogData.createdAt.split("T")[0],
+            authorId: blogData.authorId,
+            author: {
+              name: blogData.author.name ? blogData.author.name : "",
+              bio: blogData.author.bio ? blogData.author.bio : "",
+            },
           };
         });
       } catch (error) {

@@ -3,18 +3,21 @@ import ReadTime from "../ui/readTime";
 import UserAvatar from "../ui/userAvatar";
 import { useNavigate } from "react-router-dom";
 import EditBlogBtn from "../button/editBlogBtn";
+import type { Blog } from "../../utils/types/blog";
 import DeleteBlogBtn from "../button/deleteBlogBtn";
-import type { BlogData } from "../../utils/types/blog";
+import type { DeepPartial } from "../../utils/utils";
 
 export default function BlogCard({
   id = "#",
   title = "The Art of Storytelling in the Digital Age",
   excerpt = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates consequuntur quae, perferendis error.",
   content = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, nostrum cupiditate architecto doloremque ducimus earum. Eligendi, impedit ipsam nemo, aliquam excepturi tempora velit alias ad voluptatum eveniet nulla, provident fugiat.",
-  postedOn = "2025-10-08",
-  authorName = "Sarah Chen",
+  createdAt = "2025-10-08",
+  author = {
+    name: "Sarah Chen",
+  },
   showBtns = false,
-}: BlogData & { showBtns?: boolean }) {
+}: DeepPartial<Blog> & { showBtns?: boolean }) {
   const navigate = useNavigate();
   return (
     <>
@@ -30,8 +33,8 @@ export default function BlogCard({
         {/* Author & Posted On */}
         <div className="flex justify-between mt-4 items-center text-[#7c706a] text-sm">
           <div className="flex items-center">
-            <UserAvatar name={authorName} size="SMALL" />
-            <NameDate name={authorName} date={postedOn} size="SMALL" />
+            <UserAvatar name={author.name} size="SMALL" />
+            <NameDate name={author.name} date={createdAt} size="SMALL" />
           </div>
           <ReadTime content={content} />
         </div>
