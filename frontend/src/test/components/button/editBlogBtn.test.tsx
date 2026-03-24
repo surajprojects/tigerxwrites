@@ -1,30 +1,17 @@
 import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
-import BackBtn from "../../../components/button/backBtn";
+import EditBlogBtn from "../../../components/button/editBlogBtn";
 
-describe("BackBtn component", () => {
+describe("EditBlogBtn component", () => {
   // component render with default text
   test("render default text", () => {
     render(
       <MemoryRouter>
-        <BackBtn />
+        <EditBlogBtn />
       </MemoryRouter>,
     );
     const link = screen.getByRole("link", {
-      name: "Back",
-    });
-    expect(link).toBeInTheDocument();
-  });
-
-  // component render with provided text
-  test("render provided text", () => {
-    render(
-      <MemoryRouter>
-        <BackBtn text="Back Btn Link" />
-      </MemoryRouter>,
-    );
-    const link = screen.getByRole("link", {
-      name: "Back Btn Link",
+      name: "Edit",
     });
     expect(link).toBeInTheDocument();
   });
@@ -33,7 +20,7 @@ describe("BackBtn component", () => {
   test("render with default href", () => {
     render(
       <MemoryRouter>
-        <BackBtn />
+        <EditBlogBtn />
       </MemoryRouter>,
     );
     const link = screen.getByRole("link");
@@ -44,7 +31,7 @@ describe("BackBtn component", () => {
   test("render with provided href", () => {
     render(
       <MemoryRouter>
-        <BackBtn linkTo="/backhome" />
+        <EditBlogBtn linkTo="/backhome" />
       </MemoryRouter>,
     );
     const link = screen.getByRole("link");

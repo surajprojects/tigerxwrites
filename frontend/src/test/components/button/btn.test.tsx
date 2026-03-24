@@ -3,14 +3,14 @@ import { render, screen } from "@testing-library/react";
 
 describe("Btn component", () => {
   // component render with default text
-  test("renders default text", () => {
+  test("render default text", () => {
     render(<Btn />);
     const button = screen.getByRole("button", { name: "Click here!" });
     expect(button).toBeInTheDocument();
   });
 
   // component render with provided text
-  test("renders with provided text", () => {
+  test("render with provided text", () => {
     render(<Btn text="Submit" />);
     const button = screen.getByRole("button", { name: "Submit" });
     expect(button).toBeInTheDocument();
