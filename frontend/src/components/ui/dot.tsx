@@ -17,7 +17,7 @@ export default function Dot({ size }: { size?: "EXTRASMALL" | "SMALL" | "LARGE" 
   return (
     <>
       <div>
-        <div className={`w-${shapeSize} h-${shapeSize} bg-gray-200 rounded-full`}></div>
+        <div role="dot" className={`w-${shapeSize} h-${shapeSize} bg-gray-200 rounded-full`}></div>
       </div>
     </>
   );

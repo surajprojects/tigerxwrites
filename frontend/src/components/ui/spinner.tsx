@@ -3,7 +3,7 @@ export default function Spinner({ customize = false }: { customize?: boolean }) 
     <>
       {customize ? (
         <svg
-          aria-hidden="true"
+          role="spinner"
           className="w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-orange-500"
           viewBox="0 0 100 101"
           fill="none"
@@ -21,7 +21,7 @@ export default function Spinner({ customize = false }: { customize?: boolean }) 
       ) : (
         <div role="status" className="w-full my-40 flex justify-center items-center">
           <svg
-            aria-hidden="true"
+            role="spinner"
             className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-orange-500"
             viewBox="0 0 100 101"
             fill="none"
