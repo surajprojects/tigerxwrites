@@ -10,7 +10,7 @@ export default function ReadTime({
   const minutes = Math.ceil(wordCount / wordsPerMinute);
   return (
     <>
-      <p className="flex justify-center items-center font-sans text-sm">
+      <p role="readtime" className="flex justify-center items-center font-sans text-sm">
         <ClockIcon className="w-4 h-4 mr-1" />
         <span>
           {minutes} {minutes > 1 ? "mins" : "min"} read

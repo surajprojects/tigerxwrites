@@ -11,7 +11,7 @@ export default function FormAction({
 }) {
   return (
     <>
-      <p className="my-2 text-sm text-[#7c706a] font-sans">
+      <p role="formaction" className="my-2 text-sm text-[#7c706a] font-sans">
         {text}
         <Link to={linkTo} className="text-orange-500 font-medium ml-1 hover:cursor-pointer">
           {linkName}

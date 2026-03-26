@@ -32,11 +32,14 @@ export default function FormField({
   return (
     <>
       {isTextHolder ? (
-        <div className="flex flex-col my-3">
+        <div role="formfield" className="flex flex-col my-3">
           <label htmlFor={id} className="font-sans font-medium text-sm text-[#2a2522]">
             {title}
           </label>
-          <div className="flex border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm outline-none focus-within:ring-orange-500 focus-within:ring-2 focus-within:ring-offset-2 transition duration-75 ease-out">
+          <div
+            role="inputwrapper"
+            className="flex border border-gray-300 font-sans font-normal text-[#2a2522] rounded-md px-3 py-2 my-2 text-sm outline-none focus-within:ring-orange-500 focus-within:ring-2 focus-within:ring-offset-2 transition duration-75 ease-out"
+          >
             <input
               type={fieldType}
               name={id}
@@ -57,7 +60,7 @@ export default function FormField({
             ))}
         </div>
       ) : (
-        <div className="flex flex-col my-3">
+        <div role="formfield" className="flex flex-col my-3">
           <label htmlFor={id} className="font-sans font-medium text-sm text-[#2a2522]">
             {title}
           </label>

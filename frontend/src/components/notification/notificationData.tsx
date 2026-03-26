@@ -12,6 +12,7 @@ export default function NotificationData({
   return (
     <>
       <div
+        role="notificationdata"
         onClick={() => {
           toggleShowUpdates();
           navigate(`/blogs/${blogData.id}`);

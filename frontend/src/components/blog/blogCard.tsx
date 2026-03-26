@@ -21,9 +21,13 @@ export default function BlogCard({
   const navigate = useNavigate();
   return (
     <>
-      <div className="bg-white w-full p-6 rounded-lg border border-[#ebe6e0] hover:shadow-xl hover:shadow-orange-200 duration-300 ease-out">
+      <div
+        role="blogcard"
+        className="bg-white w-full p-6 rounded-lg border border-[#ebe6e0] hover:shadow-xl hover:shadow-orange-200 duration-300 ease-out"
+      >
         {/* Title & Excerpt */}
         <div
+          role="showblogdata"
           onClick={() => navigate(`/blogs/${id}`)}
           className="border-b border-[#ebe6e0] hover:cursor-pointer hover:text-orange-500 ease-out duration-200"
         >
@@ -40,7 +44,7 @@ export default function BlogCard({
         </div>
         {/* Buttons */}
         {showBtns && (
-          <div className="w-full flex mt-5 border-t border-[#ebe6e0] pt-4">
+          <div role="showbtns" className="w-full flex mt-5 border-t border-[#ebe6e0] pt-4">
             <EditBlogBtn linkTo={`/blogs/${id}/edit`} />
             <DeleteBlogBtn blogId={id} />
           </div>
