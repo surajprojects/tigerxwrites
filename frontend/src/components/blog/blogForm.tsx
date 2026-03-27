@@ -36,6 +36,7 @@ export default function BlogForm({
   return (
     <>
       <form
+        role="blogform"
         onSubmit={async (evt) => {
           setIsLoading(true);
           evt.preventDefault();
@@ -57,8 +58,8 @@ export default function BlogForm({
             Title
           </label>
           <input
-            name="title"
             id="title"
+            name="title"
             value={formData.title}
             onChange={handleChange}
             placeholder="Enter your story title..."
@@ -72,8 +73,8 @@ export default function BlogForm({
             Excerpt
           </label>
           <textarea
-            name="excerpt"
             id="excerpt"
+            name="excerpt"
             onChange={handleChange}
             value={formData.excerpt}
             placeholder="Write a brief summary of your story..."
@@ -90,8 +91,8 @@ export default function BlogForm({
             Content
           </label>
           <textarea
-            name="content"
             id="content"
+            name="content"
             onChange={handleChange}
             value={formData.content}
             placeholder="Share your story with the world..."

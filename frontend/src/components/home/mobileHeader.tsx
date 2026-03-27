@@ -14,6 +14,7 @@ export default function MobileHeader({
     <>
       {/* Nav Links */}
       <ul
+        role="mobileheader"
         onClick={() => setShowMenu((prevData) => !prevData)}
         className="flex flex-col absolute top-14 right-4 w-48 text-sm border border-gray-50 shadow-sm font-inter md:hidden bg-white p-2 rounded-lg"
       >

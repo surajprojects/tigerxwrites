@@ -32,7 +32,7 @@ afterEach(() => {
 
 describe("DeleteBlogBtn component", () => {
   // component render with default text and button type
-  test("render default text and button type", () => {
+  test("render with default text and button type", () => {
     render(<DeleteBlogBtn />);
     const button = screen.getByRole("button", {
       name: "Delete",
