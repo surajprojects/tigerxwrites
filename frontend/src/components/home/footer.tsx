@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <>
-      <footer className="w-full border-t border-[#ebe6e0] bg-[#fffdfc]">
+      <footer role="footer" className="w-full border-t border-[#ebe6e0] bg-[#fffdfc]">
         <div className="flex flex-col md:flex-row justify-between mx-auto py-12 px-4 md:px-8 border-b border-[#ebe6e0] w-full xl:max-w-7xl">
           <div className="max-w-xs lg:max-w-sm">
             <h6 className="font-bold text-2xl text-orange-500">Tiger Writes</h6>
@@ -47,7 +47,7 @@ export default function Footer() {
         </div>
         <div className="flex flex-col justify-center items-center py-8 px-5">
           <div className="text-sm text-[#7c706a] font-medium text-center flex flex-col items-center">
-            <span>Made with ❤️ by TigerxInsights &copy; 2025-2026</span>
+            <span role="copyright">Made with ❤️ by TigerxInsights &copy; 2025-2026</span>
             <span>Your insights, our priority</span>
           </div>
         </div>

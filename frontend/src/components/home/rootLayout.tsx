@@ -10,7 +10,7 @@ export default function RootLayout() {
     <>
       <ScrollToTop />
       <AuthProvider>
-        <div className="flex flex-col min-h-screen">
+        <div role="wrapper" className="flex flex-col min-h-screen">
           <Header />
           <main className="flex flex-1 justify-center bg-[#fffcfa]">
             <Outlet />
