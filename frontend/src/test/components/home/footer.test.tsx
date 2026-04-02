@@ -36,7 +36,7 @@ describe("Footer component", () => {
     expect(within(footer).getByRole("link", { name: "LinkedIn" })).toHaveAttribute("href", "/");
     expect(within(footer).getByRole("link", { name: "Contact" })).toHaveAttribute(
       "href",
-      "https://tigerxinsights.com/#contact",
+      "https://tigerxinsights.vercel.app/#contact",
     );
     // Coypright
     expect(within(footer).getByRole("copyright")).toBeInTheDocument();

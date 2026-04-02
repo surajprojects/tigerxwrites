@@ -39,7 +39,7 @@ export default function Footer() {
               <Link to={"#"}>LinkedIn</Link>
             </li>
             <li className="m-3 hover:text-orange-500 duration-300 ease-out">
-              <a href="https://tigerxinsights.com/#contact" target="_blank">
+              <a href="https://tigerxinsights.vercel.app/#contact" target="_blank">
                 Contact
               </a>
             </li>
