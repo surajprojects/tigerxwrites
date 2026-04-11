@@ -35,7 +35,7 @@ Each user can manage only their own blogs, while all blogs remain publicly viewa
 
 ## Deployment
 
-This frontend is deployed using [Vercel](https://vercel.com/) by Tiger. You can access the live version here: [Tiger Writes Frontend](https://tigerxwrites.codax.cloud/)
+This frontend is deployed using [Vercel](https://vercel.com/) by Tiger. You can access the live version here [Tiger Writes Frontend](https://tigerxwrites.codax.cloud/)
 
 ## Installation & Setup
 

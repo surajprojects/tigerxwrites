@@ -13,7 +13,7 @@ A published npm package containing **Zod validation schemas** and **TypeScript t
 #### Features
 - Input validation for user signup/login and blog CRUD.
 - Type-safe data models shared across backend and frontend.
-- Published to npm: `@tigerxinsights/tigerxwrites`
+- Published to npm `@tigerxinsights/tigerxwrites`
 
 #### Tech Used
 - Zod
@@ -107,7 +107,7 @@ tiger-writes/
 - **Serverless backend** on Cloudflare Workers.
 - **Fast frontend** with Vite + React.
 - Secure authentication using JWT and bcrypt.
-- Modern dev tools: TypeScript, ESLint, Vitest.
+- Modern dev tools TypeScript, ESLint, Vitest.
 
 ## License
 

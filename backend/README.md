@@ -27,7 +27,7 @@ This is the backend for the **Tiger Writes** blogging web app. It is built using
 
 ## Deployment
 
-This backend is deployed using [Cloudflare](https://www.cloudflare.com/) by Tiger. You can access the live version here: [Tiger Writes Backend](https://api.tigerxwrites.codax.cloud/api/v1/blog/page/1)
+This backend is deployed using [Cloudflare](https://www.cloudflare.com/) by Tiger. You can access the live version here [Tiger Writes Backend](https://api.tigerxwrites.codax.cloud/api/v1/blog/page/1)
 
 ## How to Run Locally
 
