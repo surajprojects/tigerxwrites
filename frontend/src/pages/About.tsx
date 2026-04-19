@@ -42,7 +42,7 @@ export default function About() {
             <p className="text-lg font-medium font-sans mb-6">
               Have questions or want to collaborate?
             </p>
-            <ContactBtn newTab={true} hrefLink="https://www.tigerxinsights.com/contact" />
+            <ContactBtn newTab={true} hrefLink="https://tigerxinsights.vercel.app/#contact" />
           </div>
         </div>
       </section>

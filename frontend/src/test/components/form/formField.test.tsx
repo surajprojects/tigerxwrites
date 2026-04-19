@@ -1,6 +1,6 @@
 import type { ChangeEvent } from "react";
-import { render, screen, within } from "@testing-library/react";
 import FormField from "../../../components/form/formField";
+import { render, screen, within } from "@testing-library/react";
 
 describe("FormField component", () => {
   // component render with default values

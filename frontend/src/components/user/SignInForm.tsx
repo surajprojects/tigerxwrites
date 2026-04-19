@@ -17,8 +17,8 @@ export default function SignInForm({
   };
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [formData, setFormData] = useState<SignInInput>(initialData);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [formData, setFormData] = useState<SignInInput>(initialData);
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const fieldName = evt.target.name;
@@ -34,11 +34,12 @@ export default function SignInForm({
 
   return (
     <>
-      <section className="bg-white w-full h-full p-5">
+      <section role="signinformwrapper" className="bg-white w-full h-full p-5">
         <div className="rounded-lg border border-[#ebe6e0] p-6 my-40 w-fit mx-auto shadow-xs">
           <FormHeader />
           {/* Sign In Form */}
           <form
+            role="signinform"
             onSubmit={async (evt) => {
               setIsLoading(true);
               evt.preventDefault();
@@ -66,6 +67,7 @@ export default function SignInForm({
               onChangeFunc={handleChange}
             >
               <button
+                role="showpasswordbtn"
                 type="button"
                 onClick={() => setShowPassword((prevData) => !prevData)}
                 className="inline px-0.5 cursor-pointer"

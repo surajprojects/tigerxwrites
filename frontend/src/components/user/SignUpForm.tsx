@@ -45,7 +45,7 @@ export default function SignUpForm({
 
   return (
     <>
-      <section className="bg-white w-full h-full p-5">
+      <section role="signupformwrapper" className="bg-white w-full h-full p-5">
         <div className="rounded-lg border border-[#ebe6e0] p-6 my-40 w-fit mx-auto shadow-xs">
           <FormHeader
             title="Create an account"
@@ -53,6 +53,7 @@ export default function SignUpForm({
           />
           {/* Sign Up Form */}
           <form
+            role="signupform"
             onSubmit={async (evt) => {
               setIsLoading(true);
               evt.preventDefault();
@@ -94,6 +95,7 @@ export default function SignUpForm({
               onChangeFunc={handleChange}
             >
               <button
+                role="showpasswordbtn"
                 type="button"
                 onClick={() => setShowPassword((prevData) => !prevData)}
                 className="inline px-0.5 cursor-pointer"
@@ -118,6 +120,7 @@ export default function SignUpForm({
               msgError="Password doesn't match!"
             >
               <button
+                role="showconfirmpasswordbtn"
                 type="button"
                 onClick={() => setShowConfirmPassword((prevData) => !prevData)}
                 className="inline px-0.5 cursor-pointer"
