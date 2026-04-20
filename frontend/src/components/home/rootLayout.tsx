@@ -12,7 +12,7 @@ export default function RootLayout() {
       <AuthProvider>
         <div role="wrapper" className="flex flex-col min-h-screen">
           <Header />
-          <main className="flex flex-1 justify-center bg-[#fffcfa]">
+          <main role="maincontent" className="flex flex-1 justify-center bg-[#fffcfa]">
             <Outlet />
           </main>
           <Footer />

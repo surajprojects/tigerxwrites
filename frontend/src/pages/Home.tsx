@@ -21,11 +21,12 @@ export default function Home() {
   }, []);
   return (
     <>
-      <section className="w-full pt-[3.8rem]">
+      <section role="home" className="w-full pt-[3.8rem]">
         {/* Hero Section */}
         <div className="relative w-full">
           {/* Background Image */}
           <img
+            role="backgroundimage"
             src="/images/tiger-hero-page.jpg"
             alt="hero-section"
             className="w-full h-[38rem] object-cover"
@@ -33,7 +34,10 @@ export default function Home() {
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-white/100 to-white/25"></div>
           {/* Content */}
-          <div className="absolute inset-0 mx-auto w-full xl:max-w-7xl px-4 md:px-8 flex flex-col justify-center">
+          <div
+            role="content"
+            className="absolute inset-0 mx-auto w-full xl:max-w-7xl px-4 md:px-8 flex flex-col justify-center"
+          >
             <div>
               <h1 className="text-7xl font-bold flex flex-col">
                 <span className="text-[#2a2522]">Where words</span>
@@ -45,6 +49,7 @@ export default function Home() {
               </p>
               {/* CTA */}
               <button
+                role="cta"
                 onClick={scrollToAbout}
                 type="button"
                 className="text-white text-sm bg-orange-500 py-3 px-8 rounded-md flex justify-center items-center font-medium hover:cursor-pointer hover:bg-orange-600 duration-300 ease-out"
@@ -57,6 +62,7 @@ export default function Home() {
         </div>
         {/* Featured Stories */}
         <div
+          role="featured"
           id="featured"
           ref={aboutRef}
           className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8 scroll-mt-8"

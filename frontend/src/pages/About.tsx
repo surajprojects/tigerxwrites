@@ -4,10 +4,10 @@ import ContactBtn from "../components/button/contactBtn";
 export default function About() {
   return (
     <>
-      <section className="w-full h-full bg-white py-24 pb-10">
+      <section role="about" className="w-full h-full bg-white py-24 pb-10">
         <div className="w-full md:w-2xl lg:w-3xl px-4 mx-auto">
           {/* About Tiger Writes */}
-          <div>
+          <div role="abouttigerwrites">
             <h2 className="text-6xl font-bold text-[#2a2522] my-8">
               About <span className="text-orange-500">Tiger Writes</span>
             </h2>
@@ -38,7 +38,7 @@ export default function About() {
             description="Whether you're here to read, write, or both, we're glad you're part of our community. Together, we're building a space where diverse voices can flourish and meaningful conversations can begin."
           />
           {/* Get in Touch */}
-          <div className="border-t border-[#ebe6e0] py-8">
+          <div role="getintouch" className="border-t border-[#ebe6e0] py-8">
             <p className="text-lg font-medium font-sans mb-6">
               Have questions or want to collaborate?
             </p>
