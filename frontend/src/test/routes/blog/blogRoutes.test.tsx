@@ -1,52 +1,17 @@
-import { vi } from "vitest";
-import axiosInstance from "../../../utils/axios";
+import { setupAxiosMock } from "../../mocks/axios";
 import { rootRoute } from "../../../routes/rootRoute";
 import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 
-vi.mock("../../../utils/axios", () => ({
-  default: {
-    get: vi.fn(),
-  },
-}));
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 beforeEach(() => {
-  axiosInstance.get = vi.fn().mockImplementation((url: string) => {
-    if (url.includes("user/me")) {
-      return Promise.resolve({
-        data: {
-          userData: {
-            id: "1",
-            name: "tiger",
-            email: "email@gmail.com",
-            bio: null,
-          },
-        },
-      });
-    }
-
-    if (url.includes("blog/page")) {
-      return Promise.resolve({
-        data: {
-          bulkBlogs: [],
-          blogsCount: 0,
-        },
-      });
-    }
-
-    return Promise.resolve({ data: {} });
-  });
+  setupAxiosMock();
 });
 
-describe("RootLayout route", () => {
-  // renders home page on / path
-  test("renders home page on / path", async () => {
+describe("Blog Routes", () => {
+  // renders all blogs page on /blogs path
+  test("renders all blogs page on /blogs path", async () => {
     const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/"],
+      initialEntries: ["/blogs"],
     });
     render(<RouterProvider router={router} />);
     // RootLayout Component
@@ -54,18 +19,17 @@ describe("RootLayout route", () => {
     expect(await screen.findByRole("header")).toBeInTheDocument();
     expect(await screen.findByRole("maincontent")).toBeInTheDocument();
     expect(await screen.findByRole("footer")).toBeInTheDocument();
-    // Home Component
-    expect(await screen.findByRole("home")).toBeInTheDocument();
-    expect(await screen.findByRole("backgroundimage")).toBeInTheDocument();
-    expect(await screen.findByRole("content")).toBeInTheDocument();
-    expect(await screen.findByRole("cta")).toBeInTheDocument();
-    expect(await screen.findByRole("featured")).toBeInTheDocument();
+    // Blogs Component
+    expect(await screen.findByRole("blogswrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("blogsheader")).toBeInTheDocument();
+    expect(await screen.findByRole("blogslist")).toBeInTheDocument();
+    expect(await screen.findByRole("pagination")).toBeInTheDocument();
   });
 
-  // renders about page on /about path
-  test("renders about page on /about path", async () => {
+  // renders new blog page on /blogs/new path
+  test("renders new blog page on /blogs/new path", async () => {
     const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/about"],
+      initialEntries: ["/blogs/new"],
     });
     render(<RouterProvider router={router} />);
     // RootLayout Component
@@ -73,16 +37,19 @@ describe("RootLayout route", () => {
     expect(await screen.findByRole("header")).toBeInTheDocument();
     expect(await screen.findByRole("maincontent")).toBeInTheDocument();
     expect(await screen.findByRole("footer")).toBeInTheDocument();
-    // About Component
-    expect(await screen.findByRole("about")).toBeInTheDocument();
-    expect(await screen.findByRole("abouttigerwrites")).toBeInTheDocument();
-    expect(await screen.findByRole("getintouch")).toBeInTheDocument();
+    // New Blog Component
+    expect(await screen.findByRole("newblogwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("backbtnwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("blogformwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("blogform")).toBeInTheDocument();
+    expect(await screen.findByText("Create a New Story")).toBeInTheDocument();
+    expect(await screen.findByText("Publish Story")).toBeInTheDocument();
   });
 
-  // renders 404 page not found on /random path
-  test("renders 404 page not found on /random path", async () => {
+  // renders a blog page on /blogs/:blogId path
+  test("renders a blog page on /blogs/1 path", async () => {
     const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/random"],
+      initialEntries: ["/blogs/1"],
     });
     render(<RouterProvider router={router} />);
     // RootLayout Component
@@ -90,7 +57,29 @@ describe("RootLayout route", () => {
     expect(await screen.findByRole("header")).toBeInTheDocument();
     expect(await screen.findByRole("maincontent")).toBeInTheDocument();
     expect(await screen.findByRole("footer")).toBeInTheDocument();
-    // 404 page not found
-    expect(await screen.findByRole("pagenotfound")).toBeInTheDocument();
+    // Blog Component
+    expect(await screen.findByRole("blogwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("backbtnwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("showblog")).toBeInTheDocument();
+  });
+
+  // renders edit blog page on /blogs/:blogId/edit path
+  test("renders edit blog page on /blogs/1/edit path", async () => {
+    const router = createMemoryRouter(rootRoute, {
+      initialEntries: ["/blogs/1/edit"],
+    });
+    render(<RouterProvider router={router} />);
+    // RootLayout Component
+    expect(await screen.findByRole("wrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("header")).toBeInTheDocument();
+    expect(await screen.findByRole("maincontent")).toBeInTheDocument();
+    expect(await screen.findByRole("footer")).toBeInTheDocument();
+    // Edit Blog Component
+    expect(await screen.findByRole("editblogwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("backbtnwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("blogformwrapper")).toBeInTheDocument();
+    expect(await screen.findByRole("blogform")).toBeInTheDocument();
+    expect(await screen.findByText("Edit Your Story")).toBeInTheDocument();
+    expect(await screen.findByText("Update Story")).toBeInTheDocument();
   });
 });

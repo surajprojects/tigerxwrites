@@ -11,16 +11,19 @@ export default function Blogs() {
   const { blogsData, isLoading, totalPages } = useBlogs(currentPage);
   return (
     <>
-      <section className="w-full bg-white py-20 pb-10">
+      <section role="blogswrapper" className="w-full bg-white py-20 pb-10">
         <div className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8">
-          <div>
+          <div role="blogsheader">
             <h2 className="text-5xl font-bold text-[#2a2522]">All Stories</h2>
             <p className="text-lg text-[#7c706a] my-5">
               Discover insights and perspectives from our community
             </p>
           </div>
           {isLoading ? (
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              role="blogslistskelton"
+              className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               <BlogSkeletonCard key={1} />
               <BlogSkeletonCard key={2} />
               <BlogSkeletonCard key={3} />
@@ -29,7 +32,10 @@ export default function Blogs() {
               <BlogSkeletonCard key={6} />
             </div>
           ) : (
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              role="blogslist"
+              className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               {blogsData.length > 0 ? (
                 blogsData.map((blog, idx) => {
                   return (
@@ -52,7 +58,7 @@ export default function Blogs() {
               )}
             </div>
           )}
-          <div className="mt-8 flex">
+          <div role="pagination" className="mt-8 flex">
             {currentPage > 1 && (
               <button
                 onClick={() => {

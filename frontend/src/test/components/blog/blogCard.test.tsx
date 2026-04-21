@@ -1,17 +1,7 @@
-import { vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import BlogCard from "../../../components/blog/blogCard";
 import { MemoryRouter, useNavigate } from "react-router-dom";
 import { render, screen, within } from "@testing-library/react";
-
-const mockedNavigate = vi.fn();
-vi.mock(import("react-router-dom"), async (importOriginal) => {
-  const actual = await importOriginal();
-  return {
-    ...actual,
-    useNavigate: () => mockedNavigate,
-  };
-});
 
 describe("BlogCard component", () => {
   // component render with default values

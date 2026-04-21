@@ -4,11 +4,6 @@ import userEvent from "@testing-library/user-event";
 import { render, screen, within } from "@testing-library/react";
 import NotificationData from "../../../components/notification/notificationData";
 
-const mockedNavigate = vi.fn();
-vi.mock("react-router-dom", () => ({
-  useNavigate: () => mockedNavigate,
-}));
-
 describe("NotificationData component", () => {
   // component render with provided values
   test("render with provided values", () => {

@@ -27,11 +27,11 @@ export default function EditBlog() {
   };
   return (
     <>
-      <section className="w-full h-full bg-white py-20">
-        <div className="mx-auto w-full xl:max-w-7xl px-4 py-10 md:px-8">
+      <section role="editblogwrapper" className="w-full h-full bg-white py-20">
+        <div role="backbtnwrapper" className="mx-auto w-full xl:max-w-7xl px-4 py-10 md:px-8">
           <BackBtn linkTo="/blogs" text="Back to blogs" />
         </div>
-        <div className="px-4 md:px-8">
+        <div role="blogformwrapper" className="px-4 md:px-8">
           {isLoading ? (
             <Spinner />
           ) : (

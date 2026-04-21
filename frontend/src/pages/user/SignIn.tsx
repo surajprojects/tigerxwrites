@@ -27,7 +27,7 @@ export default function SignIn() {
   };
   return (
     <>
-      <section className="w-screen flex justify-center items-center">
+      <section role="signinwrapper" className="w-screen flex justify-center items-center">
         <SignInForm handleSubmit={handleSubmit} />
       </section>
     </>

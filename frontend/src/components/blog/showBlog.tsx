@@ -16,7 +16,7 @@ export default function ShowBlog({
 }: DeepPartial<Blog>) {
   return (
     <>
-      <div className="w-full md:w-3xl px-4 md:px-8 mx-auto">
+      <div role="showblog" className="w-full md:w-3xl px-4 md:px-8 mx-auto">
         <h1 className="text-5xl md:text-6xl text-[#2a2522] font-bold mb-8">{title}</h1>
         <div className="flex mt-4 items-center text-[#7c706a] text-sm border-b pb-7 border-[#ebe6e0]">
           <div className="flex items-center">

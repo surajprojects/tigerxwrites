@@ -6,22 +6,6 @@ import { render, screen } from "@testing-library/react";
 import SignOutBtn from "../../../components/button/signOutBtn";
 import { errorHandle } from "../../../utils/errors/errorHandle";
 
-vi.mock("../../../utils/axios");
-
-vi.mock("react-toastify", () => ({
-  toast: {
-    success: vi.fn(),
-  },
-}));
-
-vi.mock("../../../utils/errors/errorHandle", () => ({
-  errorHandle: vi.fn(),
-}));
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 describe("SignOutBtn component", () => {
   // component render button element with sign out text
   test("render button element with sign out text", () => {

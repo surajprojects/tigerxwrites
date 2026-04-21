@@ -9,8 +9,8 @@ export default function Blog() {
   const { blogData, isLoading } = useBlog(params.blogId || "");
   return (
     <>
-      <section className="w-full h-full bg-white py-20 pb-16">
-        <div className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8">
+      <section role="blogwrapper" className="w-full h-full bg-white py-20 pb-16">
+        <div role="backbtnwrapper" className="mx-auto w-full xl:max-w-7xl px-4 py-12 md:px-8">
           <BackBtn linkTo="/blogs" text="Back to blogs" />
         </div>
         {isLoading ? (

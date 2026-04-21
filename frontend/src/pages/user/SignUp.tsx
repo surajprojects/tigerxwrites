@@ -27,7 +27,7 @@ export default function SignUp() {
   };
   return (
     <>
-      <section className="w-screen flex justify-center items-center">
+      <section role="signupwrapper" className="w-screen flex justify-center items-center">
         <SignUpForm handleSubmit={handleSubmit} />
       </section>
     </>

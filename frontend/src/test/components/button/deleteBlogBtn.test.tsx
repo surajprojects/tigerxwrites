@@ -9,27 +9,6 @@ import { errorHandle } from "../../../utils/errors/errorHandle";
 import { render, screen, waitFor } from "@testing-library/react";
 import DeleteBlogBtn from "../../../components/button/deleteBlogBtn";
 
-vi.mock("../../../utils/axios");
-
-vi.mock("react-toastify", () => ({
-  toast: {
-    success: vi.fn(),
-  },
-}));
-
-const mockedNavigate = vi.fn();
-vi.mock("react-router-dom", () => ({
-  useNavigate: () => mockedNavigate,
-}));
-
-vi.mock("../../../utils/errors/errorHandle", () => ({
-  errorHandle: vi.fn(),
-}));
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 describe("DeleteBlogBtn component", () => {
   // component render with default text and button type
   test("render with default text and button type", () => {

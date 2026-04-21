@@ -12,8 +12,6 @@ function TestConsumer() {
   return <div>{ctx?.userData.name}</div>;
 }
 
-vi.mock("../../../utils/axios");
-
 vi.mock("../../../components/ui/spinner", () => ({
   default: () => <div>Loading...</div>,
 }));

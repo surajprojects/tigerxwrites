@@ -1,47 +1,12 @@
-import { vi } from "vitest";
-import axiosInstance from "../../utils/axios";
 import { screen } from "@testing-library/react";
 import { renderWithRouter } from "../testUtils";
-
-vi.mock("../../utils/axios", () => ({
-  default: {
-    get: vi.fn(),
-  },
-}));
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
+import { setupAxiosMock } from "../mocks/axios";
 
 beforeEach(() => {
-  axiosInstance.get = vi.fn().mockImplementation((url: string) => {
-    if (url.includes("user/me")) {
-      return Promise.resolve({
-        data: {
-          userData: {
-            id: "1",
-            name: "tiger",
-            email: "email@gmail.com",
-            bio: null,
-          },
-        },
-      });
-    }
-
-    if (url.includes("blog/page")) {
-      return Promise.resolve({
-        data: {
-          bulkBlogs: [],
-          blogsCount: 0,
-        },
-      });
-    }
-
-    return Promise.resolve({ data: {} });
-  });
+  setupAxiosMock();
 });
 
-describe("RootLayout route", () => {
+describe("Root Route", () => {
   // renders home page on / path
   test("renders home page on / path", async () => {
     renderWithRouter("/");

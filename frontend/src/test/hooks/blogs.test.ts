@@ -4,16 +4,6 @@ import axiosInstance from "../../utils/axios";
 import { renderHook, waitFor } from "@testing-library/react";
 import { errorHandle } from "../../utils/errors/errorHandle";
 
-vi.mock("../../../utils/axios");
-
-vi.mock("../../utils/errors/errorHandle", () => ({
-  errorHandle: vi.fn(),
-}));
-
-afterEach(() => {
-  vi.clearAllMocks();
-});
-
 describe("useBlogs hook", () => {
   // hook fetches blogs and sets state correctly
   test("fetches blogs and sets state correctly", async () => {
