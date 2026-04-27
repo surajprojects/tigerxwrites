@@ -21,7 +21,7 @@ export default function EditBlog() {
       toast.success("Blog updated successfully!!!");
       return true;
     } catch (error) {
-      errorHandle(error);
+      await errorHandle(error);
       return false;
     }
   };

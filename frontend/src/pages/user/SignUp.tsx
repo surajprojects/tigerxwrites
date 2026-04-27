@@ -21,7 +21,7 @@ export default function SignUp() {
       toast.success("Sign Up successfull!!!");
       return true;
     } catch (error) {
-      errorHandle(error);
+      await errorHandle(error);
       return false;
     }
   };

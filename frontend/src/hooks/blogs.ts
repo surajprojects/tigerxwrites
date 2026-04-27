@@ -18,7 +18,7 @@ export function useBlogs(page = 1) {
         setBlogsData(blogsData);
         setBlogsCount(blogsCount);
       } catch (error) {
-        errorHandle(error);
+        await errorHandle(error);
       }
       setIsLoading(false);
     };

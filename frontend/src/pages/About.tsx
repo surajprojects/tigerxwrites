@@ -8,7 +8,7 @@ export default function About() {
         <div className="w-full md:w-2xl lg:w-3xl px-4 mx-auto">
           {/* About Tiger Writes */}
           <div role="abouttigerwrites">
-            <h2 className="text-6xl font-bold text-[#2a2522] my-8">
+            <h2 role="abouttitle" className="text-6xl font-bold text-[#2a2522] my-8">
               About <span className="text-orange-500">Tiger Writes</span>
             </h2>
             <p className="text-[#7c706a] text-lg my-6 font-sans">

@@ -6,7 +6,8 @@ import { Context } from "hono";
  */
 export type Bindings = {
   DATABASE_URL: string;
-  JWT_SECRET: string;
+  ACCESS_TOKEN_SECRET: string;
+  REFRESH_TOKEN_SECRET: string;
   SECRET_KEY: string;
   CLIENT_URL: string;
   MY_RATE_LIMITER: RateLimit;

@@ -13,6 +13,7 @@ export default function ContactBtn({
     <>
       {newTab ? (
         <a
+          role="contactbtn"
           href={hrefLink}
           target="_blank"
           className="bg-orange-500 font-sans text-white text-sm font-semibold py-2 px-4 rounded-md hover:cursor-pointer hover:bg-orange-500/90 duration-300 ease-out flex w-fit items-center justify-center"
@@ -22,6 +23,7 @@ export default function ContactBtn({
         </a>
       ) : (
         <a
+          role="contactbtn"
           href={hrefLink}
           className="bg-orange-500 font-sans text-white text-sm font-semibold py-2 px-4 rounded-md hover:cursor-pointer hover:bg-orange-500/90 duration-300 ease-out flex w-fit items-center justify-center"
         >

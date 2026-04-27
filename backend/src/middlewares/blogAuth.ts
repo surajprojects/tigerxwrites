@@ -1,7 +1,7 @@
 import { verify } from "hono/jwt";
 import { getCookie } from "hono/cookie";
-import { MyContext } from "../utils/init";
 import { initPrisma } from "../utils/db";
+import { MyContext } from "../utils/init";
 
 /**
  * Blog authentication middleware
@@ -13,17 +13,20 @@ import { initPrisma } from "../utils/db";
 export const blogAuth = async (c: MyContext, next: () => Promise<void>) => {
   try {
     // Get JWT token from cookie
-    const token = getCookie(c, "token");
+    const accessToken = getCookie(c, "accessToken");
 
-    if (!token) {
-      c.status(403);
+    if (!accessToken) {
+      c.status(401);
       return c.json({ message: "Unauthorized!!!" });
     }
 
     // Verify token and extract user ID
-    const decoded = (await verify(token, c.env.JWT_SECRET, "HS256")) as { id: string };
+    const decoded = (await verify(accessToken, c.env.ACCESS_TOKEN_SECRET, "HS256")) as {
+      id: string;
+    };
+
     if (!decoded || !decoded.id) {
-      c.status(403);
+      c.status(401);
       return c.json({ message: "Unauthorized!!!" });
     }
 

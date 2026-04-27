@@ -1,7 +1,17 @@
 import { AxiosError } from "axios";
+import axiosInstance from "../axios";
 import { toast } from "react-toastify";
 
-export function errorHandle(error: unknown) {
+export async function refreshToken() {
+  try {
+    await axiosInstance.post("/user/refresh");
+    toast.info("Authentication successfull!!!");
+  } catch (error) {
+    await errorHandle(error);
+  }
+}
+
+export async function errorHandle(error: unknown) {
   if (error instanceof AxiosError && error.response) {
     const status = error.response.status;
     switch (status) {
@@ -10,7 +20,7 @@ export function errorHandle(error: unknown) {
         toast.error("Bad Request. Please check your input.");
         break;
       case 401:
-        toast.error("Unauthorized. Please login again.");
+        await refreshToken();
         break;
       case 404:
         toast.error("Data not found!!!");

@@ -8,16 +8,18 @@ export default function SignOutBtn() {
   const userData = useContext(UserDataContext);
   const handleSignOut = async () => {
     try {
-      await axiosInstance.get("/user/signout");
-      userData?.setUserData({
-        id: "",
-        name: "",
-        email: "",
-        bio: "",
-      });
+      await axiosInstance.post("/user/signout");
+      if (userData) {
+        userData.setUserData({
+          id: "",
+          name: "",
+          email: "",
+          bio: "",
+        });
+      }
       toast.success("Sign Out successfull!!!");
     } catch (error) {
-      errorHandle(error);
+      await errorHandle(error);
     }
   };
   return (

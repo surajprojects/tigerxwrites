@@ -40,7 +40,7 @@ export function useBlog(blogId: string) {
           };
         });
       } catch (error) {
-        errorHandle(error);
+        await errorHandle(error);
       }
       setIsLoading(false);
     };

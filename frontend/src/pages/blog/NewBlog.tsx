@@ -17,7 +17,7 @@ export default function NewBlog() {
       toast.success("Blog created successfully!!!");
       return true;
     } catch (error) {
-      errorHandle(error);
+      await errorHandle(error);
       return false;
     }
   };

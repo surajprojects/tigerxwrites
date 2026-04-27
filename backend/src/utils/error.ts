@@ -24,5 +24,5 @@ export function handleError(error: unknown, c: MyContext) {
     }
   }
   c.status(500);
-  return c.json({ message: "Internal Server Error!!!" });
+  return c.json({ message: "Internal Server Error!!!", error });
 }

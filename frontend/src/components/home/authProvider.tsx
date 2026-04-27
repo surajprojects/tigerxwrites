@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axios";
 import type { User } from "../../utils/types/user";
 import { UserDataContext } from "../../store/userContext";
+import { errorHandle } from "../../utils/errors/errorHandle";
 
 export default function AuthProvider({
   children,
@@ -25,7 +26,7 @@ export default function AuthProvider({
         const data: User = result.data.userData;
         setUserData(data);
       } catch (error) {
-        console.error(error);
+        await errorHandle(error);
       }
       setIsLoading(false);
     };
