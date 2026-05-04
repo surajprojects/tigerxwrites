@@ -169,11 +169,17 @@ userRouter.post("/signout", async (c) => {
 
       deleteCookie(c, "refreshToken", {
         path: "/api/v1",
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
       });
     }
 
     deleteCookie(c, "accessToken", {
       path: "/api/v1",
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
     });
 
     c.status(201);

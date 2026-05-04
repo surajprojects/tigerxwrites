@@ -24,7 +24,7 @@ describe("SignOutBtn component", () => {
       name: "Sign Out",
     });
     await userEvent.click(button);
-    expect(axiosInstance.get).toHaveBeenCalledWith("/user/signout");
+    expect(axiosInstance.post).toHaveBeenCalledWith("/user/signout");
     expect(toast.success).toHaveBeenCalled();
   });
 
@@ -36,7 +36,7 @@ describe("SignOutBtn component", () => {
       name: "Sign Out",
     });
     await userEvent.click(button);
-    expect(axiosInstance.get).toHaveBeenCalledWith("/user/signout");
+    expect(axiosInstance.post).toHaveBeenCalledWith("/user/signout");
     expect(toast.success).not.toHaveBeenCalled();
     expect(errorHandle).toHaveBeenCalled();
   });
