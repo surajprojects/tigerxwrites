@@ -18,7 +18,7 @@ describe("SignOutBtn component", () => {
 
   // component handleSignOut function works onClick
   test("handleSignOut function works onClick", async () => {
-    axiosInstance.get = vi.fn().mockResolvedValue({});
+    axiosInstance.post = vi.fn().mockResolvedValue({});
     render(<SignOutBtn />);
     const button = screen.getByRole("button", {
       name: "Sign Out",
@@ -30,7 +30,7 @@ describe("SignOutBtn component", () => {
 
   // component handleSignOut function works when request fails
   test("handleSignOut function works when request fails", async () => {
-    axiosInstance.get = vi.fn().mockRejectedValue(new Error("Failed"));
+    axiosInstance.post = vi.fn().mockRejectedValue(new Error("Failed"));
     render(<SignOutBtn />);
     const button = screen.getByRole("button", {
       name: "Sign Out",

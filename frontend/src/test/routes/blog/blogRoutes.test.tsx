@@ -1,3 +1,4 @@
+import { renderWithRouter } from "../../testUtils";
 import { setupAxiosMock } from "../../mocks/axios";
 import { rootRoute } from "../../../routes/rootRoute";
 import { render, screen } from "@testing-library/react";
@@ -28,10 +29,7 @@ describe("Blog Routes", () => {
 
   // renders new blog page on /blogs/new path
   test("renders new blog page on /blogs/new path", async () => {
-    const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/blogs/new"],
-    });
-    render(<RouterProvider router={router} />);
+    renderWithRouter("/blogs/new");
     // RootLayout Component
     expect(await screen.findByRole("wrapper")).toBeInTheDocument();
     expect(await screen.findByRole("header")).toBeInTheDocument();
@@ -48,10 +46,7 @@ describe("Blog Routes", () => {
 
   // renders a blog page on /blogs/:blogId path
   test("renders a blog page on /blogs/1 path", async () => {
-    const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/blogs/1"],
-    });
-    render(<RouterProvider router={router} />);
+    renderWithRouter("/blogs/1");
     // RootLayout Component
     expect(await screen.findByRole("wrapper")).toBeInTheDocument();
     expect(await screen.findByRole("header")).toBeInTheDocument();
@@ -65,10 +60,7 @@ describe("Blog Routes", () => {
 
   // renders edit blog page on /blogs/:blogId/edit path
   test("renders edit blog page on /blogs/1/edit path", async () => {
-    const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/blogs/1/edit"],
-    });
-    render(<RouterProvider router={router} />);
+    renderWithRouter("/blogs/1/edit");
     // RootLayout Component
     expect(await screen.findByRole("wrapper")).toBeInTheDocument();
     expect(await screen.findByRole("header")).toBeInTheDocument();

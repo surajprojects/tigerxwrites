@@ -1,7 +1,6 @@
+import { screen } from "@testing-library/react";
 import { setupAxiosMock } from "../../mocks/axios";
-import { rootRoute } from "../../../routes/rootRoute";
-import { render, screen } from "@testing-library/react";
-import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { renderWithRouter } from "../../testUtils";
 
 beforeEach(() => {
   setupAxiosMock();
@@ -10,10 +9,7 @@ beforeEach(() => {
 describe("User Routes", () => {
   // renders signin page on /signin path
   test("renders signin page on /signin path", async () => {
-    const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/signin"],
-    });
-    render(<RouterProvider router={router} />);
+    renderWithRouter("/signin");
     // RootLayout Component
     expect(await screen.findByRole("wrapper")).toBeInTheDocument();
     expect(await screen.findByRole("header")).toBeInTheDocument();
@@ -30,10 +26,7 @@ describe("User Routes", () => {
 
   // renders signup page on /signin path
   test("renders signup page on /signup path", async () => {
-    const router = createMemoryRouter(rootRoute, {
-      initialEntries: ["/signup"],
-    });
-    render(<RouterProvider router={router} />);
+    renderWithRouter("/signup");
     // RootLayout Component
     expect(await screen.findByRole("wrapper")).toBeInTheDocument();
     expect(await screen.findByRole("header")).toBeInTheDocument();
